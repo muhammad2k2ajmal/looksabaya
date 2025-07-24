@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Abayalooks</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	<!-- <link rel="icon" href="images/favicon.png" type="image/x-icon"> -->
+	<!-- <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon"> -->
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+	<div id="pageWrapper">
+		<header id="pageHeader">
+			<div class="phTopBar bg-dark py-1">
+				<div class="container">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="mail-text">
+							<a href="mailto:abayalooks@gmail.com" class="text-white"><i class="ri-mail-fill"></i>
+								abayalooks@gmail.com</a>
+						</div>
+						<div>
+							<div class="top-bar__social">
+								<a href="javascript:void(0);"><i class="ri-facebook-fill"></i></a>
+								<a href="https://www.instagram.com/looksabaya?igsh=NW1kMTJuZ3Y4bmNp" target="_blank"><i
+										class="ri-instagram-line"></i></a>
+								<a href="javascript:void(0);"><i class="ri-youtube-fill"></i></a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="phWrapper pbpt-20 ">
+				<div class="container">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="position-relative mobile_hidden">
+							<div class="navbar navbar-expand-md p-0 position-static">
+								<button class="navbar-toggler border-0 p-0 mainNavigationToggle position-absolute"
+									type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+							<form class="d-flex position-relative d-none d-md-block phSearchForm" role="search">
+								<input class="form-control border-1 pe-8" type="search" placeholder="Search Products"
+									aria-label="Search">
+								<button
+									class="p-0 border-0 btnReset d-flex align-items-center justify-content-center position-absolute rounded-0 btnSUbmit"
+									type="submit">
+									<i class="icomoon-search"><span class="visually-hidden">submit</span></i>
+								</button>
+							</form>
+						</div>
+						<div class="">
+							<div class="logo text-center mx-auto mobile-text">
+								<a href="index.html">
+									<h2 class="mb-0 ">
+										ABAYA LOOKS
+									</h2>
+								</a>
+							</div>
+						</div>
+						<div class=" position-relative mobile_hidden_1 min_width">
+							<div class="navbar navbar-expand-md p-0 position-static">
+								<button class="navbar-toggler border-0 p-0 mainNavigationToggle position-absolute"
+									type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+							<form class="d-flex position-relative d-none d-md-block phSearchForm" role="search">
+								<input class="form-control border-1 pe-8" type="search" placeholder="Search Products"
+									aria-label="Search">
+								<button
+									class="p-0 border-0 btnReset d-flex align-items-center justify-content-center position-absolute rounded-0 btnSUbmit"
+									type="submit">
+									<i class="icomoon-search"><span class="visually-hidden">submit</span></i>
+								</button>
+							</form>
+						</div>
+
+						<div class="">
+							<ul
+								class="list-unstyled d-flex flex-wrap justify-content-end mb-0 phActionsList gap-2 gap-md-4 pt-1 pe-md-3">
+
+								<li>
+									<a href="abayalooks-login.html" class="position-relative d-block">
+										<i class="icomoon-user"><span class="visually-hidden">account</span></i>
+									</a>
+								</li>
+
+								<li data-bs-toggle="offcanvas" data-bs-target="#filtersProduct"
+									aria-controls="filtersProduct">
+									<a href="#0" class="position-relative d-block">
+										<i class="icomoon-cart"><span class="visually-hidden">cart</span></i>
+										<strong
+											class="phCartBubble fw-semibold d-block text-center rounded-circle position-absolute">0</strong>
+									</a>
+								</li>
+							</ul>
+							<div class="searchrow offcanvas offcanvas-top" tabindex="-1" id="searchCol"
+								aria-labelledby="searchcol" style="height: 100vh;">
+								<div class="offcanvas-header justify-content-end">
+									<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+										aria-label="Close"></button>
+								</div>
+								<div
+									class="offcanvas-body d-flex flex-column align-items-start justify-content-md-start px-4 pt-2">
+									<h5 class="srchHD fw-light mb-3">What are you looking for?</h5>
+									<form class="w-100" role="search">
+										<div class="input-group">
+											<input type="search" class="form-control border-0"
+												placeholder="Search for products" aria-label="Search">
+											<button class="btn" type="submit">
+												<i class="fa-solid fa-magnifying-glass"></i>
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="cartsection offcanvas offcanvas-end d-flex flex-column border-0" tabindex="-1"
+								id="filtersProduct" aria-labelledby="filtersProductLabel">
+								<div class="offcanvas-header px-3 py-3 px-sm-8 py-sm-3">
+									<h6 class="cartHD mb-1 fw-normal">Your Cart (2)</h6>
+									<a class="btn-close fw-light text-decoration-none" data-bs-dismiss="offcanvas"
+										aria-label="Close">Close</a>
+								</div>
+								<div
+									class="offcanvas-body flex-grow-1 d-flex flex-column justify-content-between px-3 py-5 px-sm-8 py-sm-8">
+									<div>
+										<div class="d-flex align-items-start justify-content-between mb-4">
+											<div class="imgholder me-2">
+												<img src="images/img85.jpg" alt="Ring" class="w-100 img-fluid">
+											</div>
+											<div class="flex-grow-1">
+												<h4 class="cartHding fw-light mb-1">Premium Three Piece Abaya Set with
+													Balloon Sleeves</h4>
+												<small class="subheading fw-normal">1 × <strong class="fw-normal">Rs.
+														380.00</strong></small>
+											</div>
+											<button
+												class="btn btn-sm p-0 ms-2 btnclose border-0 bg-transparent">&times;</button>
+										</div>
+										<hr class="mb-4">
+										<div class="d-flex align-items-start justify-content-between mb-3">
+											<div class="imgholder me-2">
+												<img src="images/img86.jpg" alt="Ring" class="w-100 img-fluid">
+											</div>
+											<div class="flex-grow-1">
+												<h4 class="cartHding fw-light mb-1">Luxury Textured Open Abaya with
+													Tulle Lace Detailing</h4>
+												<small class="subheading fw-normal">1 × <strong class="fw-normal">Rs.
+														920.00</strong></small>
+											</div>
+											<button
+												class="btn btn-sm p-0 ms-2 btnclose border-0 bg-transparent">&times;</button>
+										</div>
+									</div>
+									<div>
+										<div class="d-flex justify-content-between fw-semibold mb-3">
+											<span class="HDtotal fw-normal">Total</span>
+											<span class="HDprice fw-medium">Rs. 1300.00</span>
+										</div>
+										<div class="d-grid gap-2 mb-4">
+											<button class=" fw-medium btn_hover_color"><a
+													href="looksabaya-cart.html">View Cart</a></button>
+											<button class=" fw-medium btn_hover_color"><a
+													href="looksabaya-checkout.html">Checkout</a></button>
+										</div>
+
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="phNavWrapper position-relative">
+				<div class="container">
+					<nav class="navbar navbar-expand-md d-block position-static" id="mainNavigation">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-12 col-lg-8 col-xl-8 mnCol d-none d-md-block">
+								<div class="collapse navbar-collapse mainNavigationCollapse"
+									id="mainNavigationCollapse">
+									<ul class="navbar-nav mx-auto mx-lg-0 mx-xl-auto gap-md-4 gap-xxl-7">
+										<li class="nav-item staf dropdown">
+											<a class="nav-link text-uppercase fw-medium "
+												href="looksabaya-products.html">New
+												Arrivals</a>
+										</li>
+										<li class="nav-item staf dropdown">
+											<a class="nav-link text-uppercase fw-medium"
+												href="looksabaya-products.html">Daily Wear Abaya</a>
+										</li>
+										<li class="nav-item staf dropdown">
+											<a class="nav-link text-uppercase fw-medium "
+												href="looksabaya-products.html">Fancy Abaya</a>
+										</li>
+
+										<li class="nav-item staf dropdown">
+											<a class="nav-link text-uppercase fw-medium"
+												href="looksabaya-products.html">Occassional Abaya</a>
+										</li>
+
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<main>
+			<header class="d-flex text-center breadCrumbHeader">
+				<div class="alignHolder w-100 d-flex">
+					<div class="align py-2 w-100">
+						<div class="container">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a href="index.html" class="text-decoration-none">Home</a>
+									</li>
+									<li class="breadcrumb-item">
+										<a href="looksabaya-checkout.html" class="text-decoration-none">Checkout</a>
+									</li>
+
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</header>
+			<section class="carttablewrap py-7">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 text-center">
+							<h1 class="mnHding fw-normal mb-7 mb-md-8">Checkout</h1>
+						</div>
+						<div class="col-12 col-lg-8">
+							<div class="pe-lg-16">
+								<aside
+									class="alert checkoutAlert d-flex justify-content-between align-items-center fw-normal rounded-0 pt-4 pb-3 px-3 mb-3">
+
+									<div class="d-flex">
+										<i class="ri-user-line me-2"></i>
+										<h4 class="h2vii fw-medium text-capitalize ">Shipping Addresses</h4>
+									</div>
+									<a class="alertPopBtn text-decoration-none ms-1 text-end" data-bs-toggle="collapse"
+										href="#loginAlertPopup" aria-expanded="true"
+										aria-controls="loginAlertPopup"> <i class="ri-arrow-down-s-line"></i></a>
+										
+								</aside>
+								<div id="loginAlertPopup" class="alertCollapseWrap collapse py-2 ps-1 pe-2 mb-4">
+									<form action="#" class="ChForm">
+										<!-- bilingDetailsWrap -->
+										<div class="bilingDetailsWrap row pt-lg-5 pt-xl-6 mb-8 mb-xl-14">
+											<!-- form-row -->
+											<div class="form-row d-flex flex-wrap">
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">First
+															Name <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span class="fLabel fw-normal text-capitalize d-block mb-1">Last
+															Name <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Company
+															Name</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Email
+															Address</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Phone</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Country</span>
+														<div class="coolSelectWrapper">
+															<!-- coolSelect -->
+															<select class="coolSelect form-control" id="country">
+																<option value="1" disabled="">Select Country</option>
+																<option value="6">India</option>
+																<option value="2">United States</option>
+																<option value="3">China</option>
+
+
+															</select>
+														</div>
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Address
+															<em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100 mb-2"
+															placeholder="Street Address">
+														<input type="text" class="form-control d-block w-100"
+															placeholder="Apartment, suite, unit etc. (optional)">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span class="fLabel fw-normal text-capitalize d-block mb-1">Town
+															/ City <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">State
+															/ Country <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Postcode
+															/ ZIP <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol mb-8">
+													<!-- customCheckboxLabel -->
+
+													<button type="button" class="btn_hover_color">Save Address</button>
+												</div>
+											</div>
+
+
+
+										</div>
+									</form>
+								</div>
+
+								<div class="container">
+									<div class="row align-items-start mb-3" id="address-block-0">
+										<div class="col-md-1">
+											<input type="radio" name="shipping-address" id="select-item-0"
+												class="select-item" value="630320" checked>
+										</div>
+
+										<div class="col-md-10">
+											<p class="mb-0" id="details0">AhmadWebSolutions, 0123456789</p>
+											<p class="mb-0">admin@gmail.com, Zakir Nagar, 101, New Delhi, Goa, 630320
+											</p>
+										</div>
+
+										<div class="col-md-1 text-end">
+											<a href="javascript:void(0);" class="btn btn-warning btn-sm edit-btn"
+												id="edit-btn-0" data-target="#form0" data-details="#details0"
+												style="display: inline-block;">
+												<i class="fa-solid fa-pen-to-square"></i>
+											</a>
+										</div>
+
+										<form class="deliveryForm p-0" method="POST" enctype="multipart/form-data">
+											<input type="hidden" name="type" value="cart">
+											<input type="hidden" name="shipId" value="64">
+											<input type="hidden" name="totalAmount" value="613.60">
+											<input type="hidden" name="shippingChargeShould" value="0">
+
+											<div class="col-md-12 text-end mt-3 pe-0 delivery-btn-group">
+												<button type="submit" name="submit" value="submit"
+													class="btn btn-dark btn-sm deliver-btn" id="deliver-btn-0">
+													DELIVERY HERE
+												</button>
+											</div>
+										</form>
+
+										<div class="address-edit-form" id="form0" style="display: none;">
+											<h4>Edit Address</h4>
+											<form class="row g-3">
+												<div class="col-md-6">
+													<label for="name0" class="form-label">Name</label>
+													<input type="text" class="form-control" id="name0"
+														value="AhmadWebSolutions">
+												</div>
+
+												<div class="col-md-6">
+													<label for="phone0" class="form-label">Phone</label>
+													<input type="text" class="form-control" id="phone0"
+														value="0123456789">
+												</div>
+
+												<div class="col-md-6">
+													<label for="email0" class="form-label">Email</label>
+													<input type="email" class="form-control" id="email0"
+														value="admin@gmail.com">
+												</div>
+
+												<div class="col-md-6">
+													<label for="address0" class="form-label">Address</label>
+													<input type="text" class="form-control" id="address0"
+														value="Zakir Nagar, 101">
+												</div>
+
+												<div class="col-md-12">
+													<label for="city0" class="form-label">City</label>
+													<input type="text" class="form-control" id="city0"
+														value="New Delhi">
+												</div>
+
+												<div class="col-md-6">
+													<label for="state0" class="form-label">State</label>
+													<input type="text" class="form-control" id="state0" value="Goa">
+												</div>
+
+												<div class="col-md-6">
+													<label for="pincode0" class="form-label">Pincode</label>
+													<input type="text" class="form-control" id="pincode0"
+														value="630320">
+												</div>
+											</form>
+
+											<div class="mt-4">
+												<button type="button" class="btn_hover_color me-2">Save
+													Changes</button>
+												<button type="button"
+													class="btn_hover_color cancel-edit-btn">Cancel</button>
+											</div>
+										</div>
+									</div>
+
+									<div class="row align-items-start mb-3" id="address-block-1">
+										<div class="col-md-1">
+											<input type="radio" name="shipping-address" id="select-item-1"
+												class="select-item" value="630321">
+										</div>
+
+										<div class="col-md-10">
+											<p class="mb-0" id="details1">Another User, 9876543210</p>
+											<p class="mb-0">user2@example.com, Karol Bagh, 50, New Delhi, Delhi, 110005
+											</p>
+										</div>
+
+										<div class="col-md-1 text-end">
+											<a href="javascript:void(0);" class="btn btn-warning btn-sm edit-btn"
+												id="edit-btn-1" data-target="#form1" data-details="#details1"
+												style="display: none;">
+												<i class="fa-solid fa-pen-to-square"></i>
+											</a>
+										</div>
+
+										<form class="deliveryForm p-0" method="POST" enctype="multipart/form-data">
+											<input type="hidden" name="type" value="cart">
+											<input type="hidden" name="shipId" value="65">
+											<input type="hidden" name="totalAmount" value="500.00">
+											<input type="hidden" name="shippingChargeShould" value="0">
+
+											<div class="col-md-12 text-end mt-3 pe-0 delivery-btn-group">
+												<button type="submit" name="submit" value="submit"
+													class="btn btn-dark btn-sm deliver-btn" id="deliver-btn-1"
+													style="display: none;">
+													DELIVERY HERE
+												</button>
+											</div>
+										</form>
+
+										<div class="address-edit-form" id="form1" style="display: none;">
+											<h4>Edit Address</h4>
+											<form class="row g-3">
+												<div class="col-md-6">
+													<label for="name0" class="form-label">Name</label>
+													<input type="text" class="form-control" id="name0"
+														value="AhmadWebSolutions">
+												</div>
+
+												<div class="col-md-6">
+													<label for="phone0" class="form-label">Phone</label>
+													<input type="text" class="form-control" id="phone0"
+														value="0123456789">
+												</div>
+
+												<div class="col-md-6">
+													<label for="email0" class="form-label">Email</label>
+													<input type="email" class="form-control" id="email0"
+														value="admin@gmail.com">
+												</div>
+
+												<div class="col-md-6">
+													<label for="address0" class="form-label">Address</label>
+													<input type="text" class="form-control" id="address0"
+														value="Zakir Nagar, 101">
+												</div>
+
+												<div class="col-md-12">
+													<label for="city0" class="form-label">City</label>
+													<input type="text" class="form-control" id="city0"
+														value="New Delhi">
+												</div>
+
+												<div class="col-md-6">
+													<label for="state0" class="form-label">State</label>
+													<input type="text" class="form-control" id="state0" value="Goa">
+												</div>
+
+												<div class="col-md-6">
+													<label for="pincode0" class="form-label">Pincode</label>
+													<input type="text" class="form-control" id="pincode0"
+														value="630320">
+												</div>
+											</form>
+
+											<div class="mt-4">
+												<button type="button" class="btn_hover_color save-address-btn me-2">Save
+													Changes</button>
+												<button type="button"
+													class="btn_hover_color cancel-edit-btn">Cancel</button>
+											</div>
+										</div>
+									</div>
+
+									<div class="row align-items-start mb-3" id="address-block-2">
+										<div class="col-md-1">
+											<input type="radio" name="shipping-address" id="select-item-2"
+												class="select-item" value="630322">
+										</div>
+
+										<div class="col-md-10">
+											<p class="mb-0" id="details2">Third Person, 1122334455</p>
+											<p class="mb-0">person3@test.com, Sector 18, 201, Gurugram, Haryana, 122008
+											</p>
+										</div>
+
+										<div class="col-md-1 text-end">
+											<a href="javascript:void(0);" class="btn btn-warning btn-sm edit-btn"
+												id="edit-btn-2" data-target="#form2" data-details="#details2"
+												style="display: none;">
+												<i class="fa-solid fa-pen-to-square"></i>
+											</a>
+										</div>
+
+										<form class="deliveryForm p-0" method="POST" enctype="multipart/form-data">
+											<input type="hidden" name="type" value="cart">
+											<input type="hidden" name="shipId" value="66">
+											<input type="hidden" name="totalAmount" value="750.25">
+											<input type="hidden" name="shippingChargeShould" value="0">
+
+											<div class="col-md-12 text-end mt-3 pe-0 delivery-btn-group">
+												<button type="submit" name="submit" value="submit"
+													class="btn btn-dark btn-sm deliver-btn" id="deliver-btn-2"
+													style="display: none;">
+													DELIVERY HERE
+												</button>
+											</div>
+										</form>
+
+										<div class="address-edit-form" id="form2" style="display: none;">
+											<h4>Edit Address</h4>
+											<form class="row g-3">
+												<div class="col-md-6">
+													<label for="name0" class="form-label">Name</label>
+													<input type="text" class="form-control" id="name0"
+														value="AhmadWebSolutions">
+												</div>
+
+												<div class="col-md-6">
+													<label for="phone0" class="form-label">Phone</label>
+													<input type="text" class="form-control" id="phone0"
+														value="0123456789">
+												</div>
+
+												<div class="col-md-6">
+													<label for="email0" class="form-label">Email</label>
+													<input type="email" class="form-control" id="email0"
+														value="admin@gmail.com">
+												</div>
+
+												<div class="col-md-6">
+													<label for="address0" class="form-label">Address</label>
+													<input type="text" class="form-control" id="address0"
+														value="Zakir Nagar, 101">
+												</div>
+
+												<div class="col-md-12">
+													<label for="city0" class="form-label">City</label>
+													<input type="text" class="form-control" id="city0"
+														value="New Delhi">
+												</div>
+
+												<div class="col-md-6">
+													<label for="state0" class="form-label">State</label>
+													<input type="text" class="form-control" id="state0" value="Goa">
+												</div>
+
+												<div class="col-md-6">
+													<label for="pincode0" class="form-label">Pincode</label>
+													<input type="text" class="form-control" id="pincode0"
+														value="630320">
+												</div>
+											</form>
+
+											<div class="mt-4">
+												<button type="button" class="btn_hover_color save-address-btn me-2">Save
+													Changes</button>
+												<button type="button"
+													class="btn_hover_color cancel-edit-btn">Cancel</button>
+											</div>
+										</div>
+									</div>
+
+
+
+								</div>
+
+								<div id="couponAlertPopup" class="alertCollapseWrap collapse py-2 ps-1 pe-2 mb-4">
+									<form action="#" class="ChForm">
+										<!-- bilingDetailsWrap -->
+										<div class="bilingDetailsWrap row pt-lg-5 pt-xl-6 mb-8 mb-xl-14">
+											<h3 class="h2vii fw-medium text-capitalize mb-6">Billing Details</h3>
+											<!-- form-row -->
+											<div class="form-row d-flex flex-wrap">
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">First
+															Name <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span class="fLabel fw-normal text-capitalize d-block mb-1">Last
+															Name <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Company
+															Name</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Email
+															Address</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Phone</span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Country</span>
+														<div class="coolSelectWrapper">
+															<!-- coolSelect -->
+															<select class="coolSelect form-control" id="country">
+																<option value="1" disabled="">Select Country</option>
+																<option value="6">India</option>
+																<option value="2">United States</option>
+																<option value="3">China</option>
+
+
+															</select>
+														</div>
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Address
+															<em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100 mb-2"
+															placeholder="Street Address">
+														<input type="text" class="form-control d-block w-100"
+															placeholder="Apartment, suite, unit etc. (optional)">
+													</div>
+												</div>
+												<!-- formCol -->
+												<div class="formCol mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span class="fLabel fw-normal text-capitalize d-block mb-1">Town
+															/ City <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">State
+															/ Country <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol formCol50 mb-3">
+													<!-- form-group -->
+													<div class="form-group d-block">
+														<!-- fLabel -->
+														<span
+															class="fLabel fw-normal text-capitalize d-block mb-1">Postcode
+															/ ZIP <em class="req">*</em></span>
+														<input type="text" class="form-control d-block w-100">
+													</div>
+												</div>
+												<!-- formCol / formCol50 -->
+												<div class="formCol mb-8">
+													<!-- customCheckboxLabel -->
+
+													<button type="button" class="btn_hover_color">Save Address</button>
+												</div>
+											</div>
+
+
+
+										</div>
+									</form>
+								</div>
+								<form action="#" class="ChForm">
+									<!-- bilingDetailsWrap -->
+									<div class="bilingDetailsWrap row pt-lg-5 pt-xl-6 mb-8 mb-xl-14">
+										<h3 class="h2vii fw-medium text-capitalize mb-6">Billing Details</h3>
+										<!-- form-row -->
+										<div class="form-row d-flex flex-wrap">
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">First
+														Name <em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Last
+														Name <em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol -->
+											<div class="formCol mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Company
+														Name</span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Email
+														Address</span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span
+														class="fLabel fw-normal text-capitalize d-block mb-1">Phone</span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol -->
+											<div class="formCol mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span
+														class="fLabel fw-normal text-capitalize d-block mb-1">Country</span>
+													<div class="coolSelectWrapper">
+														<!-- coolSelect -->
+														<select class="coolSelect form-control" id="country">
+															<option value="1" disabled="">Select Country</option>
+															<option value="6">India</option>
+															<option value="2">United States</option>
+															<option value="3">China</option>
+
+
+														</select>
+													</div>
+												</div>
+											</div>
+											<!-- formCol -->
+											<div class="formCol mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Address
+														<em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100 mb-2"
+														placeholder="Street Address">
+													<input type="text" class="form-control d-block w-100"
+														placeholder="Apartment, suite, unit etc. (optional)">
+												</div>
+											</div>
+											<!-- formCol -->
+											<div class="formCol mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Town /
+														City <em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">State /
+														Country <em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol formCol50 mb-3">
+												<!-- form-group -->
+												<div class="form-group d-block">
+													<!-- fLabel -->
+													<span class="fLabel fw-normal text-capitalize d-block mb-1">Postcode
+														/ ZIP <em class="req">*</em></span>
+													<input type="text" class="form-control d-block w-100">
+												</div>
+											</div>
+											<!-- formCol / formCol50 -->
+											<div class="formCol mb-8">
+												<!-- customCheckboxLabel -->
+
+												<button type="button" class="btn_hover_color">Save Address</button>
+											</div>
+										</div>
+
+
+
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="col-12 col-lg-4">
+							<div class="ms-lg-n10">
+								<div class="odrSide border py-7 px-7">
+									<h5 class="cartHeading fw-medium mb-4">Your Order</h5>
+									<div class="d-flex justify-content-between mb-3">
+										<span class="subheading fw-normal">Product</span>
+										<span class="Hprice fw-normal">Subtotal</span>
+									</div>
+									<hr class="mb-4">
+									<div class="d-flex justify-content-between align-items-start mb-3">
+										<div class="d-flex">
+											<img src="images/img85.jpg" alt="Product"
+												class="img-thumbnail border-0 p-0 me-4 rounded-0 tb-img" width="60px"
+												height="60px">
+											<div>
+												<span class="tb-heading d-block fw-light">Premium Three Piece Abaya Set
+													with Balloon Sleeves</span>
+												<small class="textQty fw-normal">QTY : 1</small>
+											</div>
+										</div>
+										<span class="tb-price fw-normal">Rs.380.00</span>
+									</div>
+
+									<!-- <div class="d-flex justify-content-between mb-4">
+										<span class="Hprice fw-normal">Subtotal</span>
+										<span class="tb-price fw-normal">Rs.380.00</span>
+									</div> -->
+									<hr class="mb-4">
+
+
+									<div class="d-flex justify-content-between mb-6">
+										<span class="subheading fw-normal">Total</span>
+										<strong class="Hprice fw-medium">Rs.380.00</strong>
+									</div>
+
+									<div class="form-check clor mb-5">
+										<input class="form-check-input" type="checkbox" id="terms" checked="">
+										<label class="form-check-label small ps-1" for="terms">
+											I have read and agree to the website <a href="javascript:void(0);">terms and
+												conditions</a> *
+										</label>
+									</div>
+									<button class="btn btnP btn-dark fw-medium w-100 mb-1">Place Order</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<div class="footerAreaWrap">
+			<aside class="footerAside pt-7 pb-4 pt-md-10 pb-md-6 pt-xl-14 pb-xl-10">
+				<div class="container">
+					<div class="ftColsWrap d-flex flex-wrap row-gap-3">
+						<div class="ftCol">
+							<div class="ftLogo mx-auto mx-sm-0 mb-6 text-center">
+								<a href="index.html" class="text-decoration-none ">
+									<h5 class="mb-0 offcanvas-title text-white">ABAYA<span class="ms-1">LOOKS </span>
+									</h5>
+
+								</a>
+							</div>
+						</div>
+						<div class="ftCol">
+							<h3 class="ftHeading mb-5 fw-normal">Shop Abayas</h3>
+							<ul class="list-unstyled ftLinksList">
+								<li>
+									<a href="looksabaya-products.html">New Arrivals</a>
+								</li>
+								<li>
+									<a href="looksabaya-products.html">Daily Wear Abaya</a>
+								</li>
+								<li>
+									<a href="looksabaya-products.html">Fancy Abaya</a>
+								</li>
+								<li>
+									<a href="looksabaya-products.html">Occasional Abaya</a>
+								</li>
+								<li>
+									<a href="looksabaya-products.html">About Us</a>
+								</li>
+								<li>
+									<a href="looksabaya-contact.html">Contact Us</a>
+								</li>
+							</ul>
+						</div>
+						<div class="ftCol">
+							<h3 class="ftHeading mb-5 fw-normal">Customer Service</h3>
+							<ul class="list-unstyled ftLinksList">
+								<li>
+									<a href="abayalooks-privacy-policy.html">Privacy Policy</a>
+								</li>
+								<li>
+									<a href="abayalooks-return-policy.html">Return and Refund Policy</a>
+								</li>
+								<li>
+									<a href="abayalooks-terms-&-conditions.html">Terms & Conditions</a>
+								</li>
+								<li>
+									<a href="abayalooks-shipping-and-delivery-policy.html">Shipping and Delivery
+										Policy</a>
+								</li>
+								<li>
+									<a href="looksabaya-faq.html">Faq</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="ftCol">
+							<h3 class="ftHeading mb-5 fw-normal">Store Details</h3>
+							<address class="ftLocation">
+								<a href="javascript:void(0);"
+									class="d-flex align-items-center text-decoration-none gap-2 ftPhone fw-normal mb-3">
+									<i
+										class="icnWrap flex-shrink-0 d-flex align-items-center justify-content-center icomoon-headphone rounded-circle"><span
+											class="visually-hidden">icon</span></i>
+									<div>
+										<strong class="d-block fw-light ftTitle text-white">Need Any Help?</strong>
+										<span>1234 5678 90</span>
+									</div>
+								</a>
+								<span class="d-block mb-1"><strong class="fw-normal">Address:</strong> 502 Zakir Nager
+									Str, <br> Oklha New Delhi</span>
+								<span class="d-block mb-1"><strong class="fw-normal">Email:</strong> <a
+										href="mailto:abayalooks@gmail.com"
+										class="text-decoration-none text-white">abayalooks@gmail.com</a></span>
+							</address>
+						</div>
+						<div class="ftCol">
+							<h3 class="ftHeading mb-5 fw-normal">Follow Us</h3>
+							<ul
+								class="list-unstyled socialNetworks d-flex flex-wrap gap-4 gap-sm-2 gap-md-4 ftSocialNetworks mb-0">
+								<li>
+									<a href="javascript:void(0);" class="text-decoration-none">
+										<i class="ri-facebook-fill"><span class="visually-hidden">facebook</span></i>
+									</a>
+								</li>
+
+								<li>
+									<a href="https://www.instagram.com/looksabaya?igsh=NW1kMTJuZ3Y4bmNp" target="_blank"
+										class="text-decoration-none">
+										<i class="icomoon-instagram"><span class="visually-hidden">instagram</span></i>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" class="text-decoration-none">
+										<i class="ri-youtube-fill"><span class="visually-hidden">pinterest</span></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<footer id="pageFooter" class="text-center py-2">
+				<div class="container">
+					<div class="d-flex justify-content-between align-items-center ">
+
+						<div>
+							<div>
+								<p class="mb-0 text-white">&copy; Copyright 2025 - Abayalooks</a>
+									All Rights Reserved</p>
+							</div>
+						</div>
+
+						<div>
+							<p class="mb-0 text-white link-hover "><a href="https://www.ahmadwebsolutions.com/"
+									target="_blank">Ecommerce
+									Design Experts</a></p>
+						</div>
+					</div>
+
+
+
+
+				</div>
+			</footer>
+		</div>
+		<!-- Sidebar Menu Wrapper -->
+		<div class="sidebarMenu offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarMenu">
+			<div class="offcanvas-header justify-content-between py-3 px-4">
+				<h5 class="offcanvas-title mb-0">ABAYA <span class="ms-2">LOOKS</span></h5>
+				<a class="btn-close fw-light text-decoration-none" data-bs-dismiss="offcanvas" aria-label="Close"></a>
+			</div>
+			<div class="offcanvas-body p-0">
+
+				<div class="tab-content" id="menuTabContent">
+					<div class="tab-pane fade show active" id="menu" role="tabpanel" aria-labelledby="menu-tab">
+						<ul class="list-unstyled">
+							<li class="py-2 px-4">
+								<a class="text-decoration-none fw-medium " href="looksabaya-products.html">New Arrivals
+								</a>
+							</li>
+							<li class="py-2 px-4">
+								<a class="text-decoration-none fw-medium d-block " href="looksabaya-products.html">
+									Daily Wear Abaya
+								</a>
+							</li>
+							<li class="py-2 px-4">
+								<a class="collapsed text-decoration-none fw-medium d-block "
+									href="looksabaya-products.html">Fancy Abaya
+								</a>
+							</li>
+							<li class="py-2 px-4">
+								<a class="collapsed text-decoration-none fw-medium d-block "
+									href="looksabaya-products.html">Occassional
+									Abaya
+								</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script src="js/jquery.min.js" defer=""></script>
+<script src="js/popper.js" defer=""></script>
+<script src="js/bootstrap.js" defer=""></script>
+<script src="js/custom.js" defer=""></script>
+<!-- Script -->
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const radioButtons = document.querySelectorAll('input[name="shipping-address"]');
+		const editButtons = document.querySelectorAll('.edit-btn');
+		const cancelButtons = document.querySelectorAll('.cancel-edit-btn');
+		const addressDetailParagraphs = document.querySelectorAll('[id^="details"]'); // Select all p tags with IDs starting with "details"
+
+		function updateButtonVisibility() {
+			radioButtons.forEach(radio => {
+				const parentRow = radio.closest('.row.align-items-start.mb-3');
+				if (parentRow) {
+					const deliverButton = parentRow.querySelector('.deliver-btn');
+					const editButton = parentRow.querySelector('.edit-btn');
+					const addressDetails = parentRow.querySelector('[id^="details"]'); // Find the details paragraph within this row
+					const editForm = parentRow.querySelector('.address-edit-form');
+
+					if (radio.checked) {
+						if (deliverButton) deliverButton.style.display = 'inline-block';
+						if (editButton) editButton.style.display = 'inline-block';
+						// When a radio button is checked, hide its form and show details by default
+						if (editForm) editForm.style.display = 'none';
+						if (addressDetails) addressDetails.style.display = 'block';
+					} else {
+						if (deliverButton) deliverButton.style.display = 'none';
+						if (editButton) editButton.style.display = 'none';
+						// When a radio button is NOT checked, hide its form and details
+						if (editForm) editForm.style.display = 'none';
+						if (addressDetails) addressDetails.style.display = 'block'; // Keep details visible if not selected
+					}
+				}
+			});
+		}
+
+		// Add event listeners to all radio buttons
+		radioButtons.forEach(radio => {
+			radio.addEventListener('change', updateButtonVisibility);
+		});
+
+		// Add event listeners for edit buttons
+		editButtons.forEach(editBtn => {
+			editBtn.addEventListener('click', function () {
+				const parentRow = editBtn.closest('.row.align-items-start.mb-3');
+				if (parentRow) {
+					const formId = editBtn.dataset.target; // Get the target form ID from data-target
+					const detailsId = editBtn.dataset.details; // Get the details ID from data-details
+					const editForm = parentRow.querySelector(formId);
+					const addressDetails = parentRow.querySelector(detailsId);
+					const deliverButton = parentRow.querySelector('.deliver-btn'); // Also hide delivery button
+
+					if (editForm) {
+						editForm.style.display = 'block'; // Show the form
+					}
+					if (addressDetails) {
+						addressDetails.style.display = 'none'; // Hide the address details
+					}
+					if (editBtn) {
+						editBtn.style.display = 'none'; // Hide the edit button itself
+					}
+					if (deliverButton) {
+						deliverButton.style.display = 'none'; // Hide the delivery button
+					}
+				}
+			});
+		});
+
+		// Add event listeners for cancel buttons
+		cancelButtons.forEach(cancelBtn => {
+			cancelBtn.addEventListener('click', function () {
+				const parentRow = cancelBtn.closest('.row.align-items-start.mb-3');
+				if (parentRow) {
+					const editForm = parentRow.querySelector('.address-edit-form');
+					const addressDetails = parentRow.querySelector('[id^="details"]');
+					const editButton = parentRow.querySelector('.edit-btn');
+					const deliverButton = parentRow.querySelector('.deliver-btn');
+					const radioBtn = parentRow.querySelector('.select-item');
+
+
+					if (editForm) {
+						editForm.style.display = 'none'; // Hide the form
+					}
+					if (addressDetails) {
+						addressDetails.style.display = 'block'; // Show address details again
+					}
+
+					// Only show edit and deliver buttons if the associated radio button is checked
+					if (radioBtn && radioBtn.checked) {
+						if (editButton) editButton.style.display = 'inline-block';
+						if (deliverButton) deliverButton.style.display = 'inline-block';
+					}
+				}
+			});
+		});
+
+		// Initial call to set the correct display state when the page loads
+		updateButtonVisibility();
+	});
+</script>
+
+
+</html>
