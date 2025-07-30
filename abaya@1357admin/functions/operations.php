@@ -366,9 +366,17 @@ class Products
     private $Price;
     private $Discount;
     private $Stock;
+    private $Weight;
+    private $Length;
+    private $Width;
+    private $Height;
+    private $Composition;
+    private $Files;
     private $Sizes;
+    private $Videofiles;
     private $Description;
     private $Lists;
+    private $DeliveryOptions;
     private $Trending;
     private $NewArrivals;
     private $BestSelling;
@@ -377,7 +385,7 @@ class Products
     private $Status;
     private $conndb;
 
-    function addProducts($CategoryId, $Name, $Price, $Discount, $Stock, $Sizes, $Description, $Lists, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+    function addProducts($CategoryId, $Name, $Price, $Discount, $Stock, $Weight, $Length, $Width, $Height, $Composition, $Sizes, $Files, $Videofiles, $Description, $Lists, $DeliveryOptions, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
     {
         $conn = new dbClass;
         $this->CategoryId = $CategoryId;
@@ -385,18 +393,26 @@ class Products
         $this->Price = $Price;
         $this->Discount = $Discount;
         $this->Stock = $Stock;
+        $this->Weight = $Weight;
+        $this->Length = $Length;
+        $this->Width = $Width;
+        $this->Height = $Height;
+        $this->Composition = $Composition;
         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
         $this->Description = $Description;
         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+        $this->DeliveryOptions = is_array($DeliveryOptions) ? $DeliveryOptions : [$DeliveryOptions];
         $this->Trending = $Trending;
         $this->NewArrivals = $NewArrivals;
         $this->BestSelling = $BestSelling;
         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
         $this->ColorImages = $ColorImages;
         $this->Status = $Status;
+        $this->Files = $Files;
+        $this->Videofiles = $Videofiles;
         $this->conndb = $conn;
 
-        $stmt = $conn->execute("INSERT INTO `product` (`category_id`, `name`, `price`, `discount`, `stock`, `description`, `trending`, `new_arrivals`, `best_selling`, `status`) VALUES ('$CategoryId', '$Name', '$Price', '$Discount', '$Stock', '$Description', '$Trending', '$NewArrivals', '$BestSelling', '$this->Status')");
+        $stmt = $conn->execute("INSERT INTO `product` (`category_id`, `name`, `image`, `video`, `price`, `discount`, `stock`, `weight`, `length`, `width`, `height`, `composition`, `description`, `trending`, `new_arrivals`, `best_selling`, `status`) VALUES ('$CategoryId', '$Name', '$Files', '$Videofiles', '$Price', '$Discount', '$Stock', '$Weight', '$Length', '$Width', '$Height', '$Composition', '$Description', '$Trending', '$NewArrivals', '$BestSelling', '$this->Status')");
         $productId = $conn->lastInsertId();
 
         foreach ($this->Sizes as $size) {
@@ -408,6 +424,18 @@ class Products
         foreach ($this->Lists as $list) {
             if ($list) {
                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$productId', '$list')");
+            }
+        }
+
+        foreach ($this->DeliveryOptions as $option) {
+            if (!empty($option['option']) && !empty($option['cost'])) {
+                // Split the combined option field into location, type, and time
+               
+                $location = $option['option'];
+                $cost = $conn->addStr($option['cost']);
+                
+                $conn->execute("INSERT INTO `product_delivery_options` (`product_id`, `delivery_location`,`cost`) VALUES ('$productId', '$location', '$cost')");
+                
             }
         }
 
@@ -425,7 +453,7 @@ class Products
         return $productId;
     }
 
-    function updateProducts($Id, $CategoryId, $Name, $Price, $Discount, $Stock, $Sizes, $Description, $Lists, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+    function updateProducts($Id, $CategoryId, $Name, $Price, $Discount, $Stock, $Weight, $Length, $Width, $Height, $Composition, $Sizes, $Files, $Videofiles, $Description, $Lists, $DeliveryOptions, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
     {
         $conn = new dbClass;
         $this->Id = $Id;
@@ -434,21 +462,30 @@ class Products
         $this->Price = $Price;
         $this->Discount = $Discount;
         $this->Stock = $Stock;
+        $this->Weight = $Weight;
+        $this->Length = $Length;
+        $this->Width = $Width;
+        $this->Height = $Height;
+        $this->Composition = $Composition;
         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
         $this->Description = $Description;
         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+        $this->DeliveryOptions = is_array($DeliveryOptions) ? $DeliveryOptions : [$DeliveryOptions];
         $this->Trending = $Trending;
         $this->NewArrivals = $NewArrivals;
         $this->BestSelling = $BestSelling;
         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
         $this->ColorImages = $ColorImages;
+        $this->Files = $Files;
+        $this->Videofiles = $Videofiles;
         $this->Status = $Status;
         $this->conndb = $conn;
 
-        $stmt = $conn->execute("UPDATE `product` SET `category_id`='$CategoryId', `name`='$Name', `price`='$Price', `discount`='$Discount', `stock`='$Stock', `description`='$Description', `trending`='$Trending', `new_arrivals`='$NewArrivals', `best_selling`='$BestSelling', `status`='$this->Status', `updated_at`=NOW() WHERE `product_id`='$Id'");
+        $stmt = $conn->execute("UPDATE `product` SET `category_id`='$CategoryId', `name`='$Name', `image`='$Files', `video`='$Videofiles', `price`='$Price', `discount`='$Discount', `stock`='$Stock', `weight`='$Weight', `length`='$Length', `width`='$Width', `height`='$Height', `composition`='$Composition', `description`='$Description', `trending`='$Trending', `new_arrivals`='$NewArrivals', `best_selling`='$BestSelling', `status`='$this->Status', `updated_at`=NOW() WHERE `product_id`='$Id'");
 
         $conn->execute("DELETE FROM `product_sizes` WHERE `product_id`='$Id'");
         $conn->execute("DELETE FROM `product_lists` WHERE `product_id`='$Id'");
+        $conn->execute("DELETE FROM `product_delivery_options` WHERE `product_id`='$Id'");
         $conn->execute("DELETE FROM `product_colors` WHERE `product_id`='$Id'");
         $conn->execute("DELETE FROM `product_images` WHERE `product_id`='$Id'");
 
@@ -461,6 +498,18 @@ class Products
         foreach ($this->Lists as $list) {
             if ($list) {
                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$Id', '$list')");
+            }
+        }
+
+        foreach ($this->DeliveryOptions as $option) {
+            if (!empty($option['option']) && !empty($option['cost'])) {
+                // Split the combined option field into location, type, and time
+               
+                $location = $option['option'];
+                $cost = $conn->addStr($option['cost']);
+                
+                $conn->execute("INSERT INTO `product_delivery_options` (`product_id`, `delivery_location`,`cost`) VALUES ('$Id', '$location', '$cost')");
+                
             }
         }
 
@@ -489,6 +538,8 @@ class Products
         $product['sizes'] = array_column($sizes, 'size');
         $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$Id'");
         $product['lists'] = array_column($lists, 'list_item');
+        $deliveryOptions = $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$Id'");
+        $product['delivery_options'] = $deliveryOptions;
         $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$Id'");
         $product['colors'] = array_column($colors, 'color_id');
 
@@ -508,6 +559,8 @@ class Products
             $product['sizes'] = array_column($sizes, 'size');
             $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$productId'");
             $product['lists'] = array_column($lists, 'list_item');
+            $deliveryOptions = $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$productId'");
+            $product['delivery_options'] = $deliveryOptions;
             $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$productId'");
             $product['colors'] = array_column($colors, 'color_id');
         }
@@ -533,6 +586,15 @@ class Products
         return $conn->getAllData("SELECT * FROM `product_images` WHERE `product_id` = '$Id' AND `color_id` = '$ColorId'");
     }
 
+    function getDeliveryOptions($Id)
+    {
+        $conn = new dbClass;
+        $this->Id = $Id;
+        $this->conndb = $conn;
+
+        return $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$Id'");
+    }
+
     function getallColor()
     {
         $conn = new dbClass;
@@ -541,6 +603,436 @@ class Products
         return $conn->getAllData("SELECT * FROM `color` WHERE `status` = 1 ORDER BY `id` DESC");
     }
 }
+// class Products
+// {
+//     private $Id;
+//     private $CategoryId;
+//     private $Name;
+//     private $Price;
+//     private $Discount;
+//     private $Stock;
+//     private $Weight;
+//     private $Length;
+//     private $Width;
+//     private $Height;
+//     private $Composition;
+//     private $Files;
+//     private $Sizes;
+//     private $Videofiles;
+//     private $Description;
+//     private $Lists;
+//     private $DeliveryOptions;
+//     private $Trending;
+//     private $NewArrivals;
+//     private $BestSelling;
+//     private $Colors;
+//     private $ColorImages;
+//     private $Status;
+//     private $conndb;
+
+//     function addProducts($CategoryId, $Name, $Price, $Discount, $Stock, $Weight, $Length, $Width, $Height, $Composition, $Sizes, $Files, $Videofiles, $Description, $Lists, $DeliveryOptions, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+//     {
+//         $conn = new dbClass;
+//         $this->CategoryId = $CategoryId;
+//         $this->Name = $Name;
+//         $this->Price = $Price;
+//         $this->Discount = $Discount;
+//         $this->Stock = $Stock;
+//         $this->Weight = $Weight;
+//         $this->Length = $Length;
+//         $this->Width = $Width;
+//         $this->Height = $Height;
+//         $this->Composition = $Composition;
+//         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
+//         $this->Description = $Description;
+//         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+//         $this->DeliveryOptions = is_array($DeliveryOptions) ? $DeliveryOptions : [$DeliveryOptions];
+//         $this->Trending = $Trending;
+//         $this->NewArrivals = $NewArrivals;
+//         $this->BestSelling = $BestSelling;
+//         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
+//         $this->ColorImages = $ColorImages;
+//         $this->Status = $Status;
+//         $this->Files = $Files;
+//         $this->Videofiles = $Videofiles;
+//         $this->conndb = $conn;
+
+//         $stmt = $conn->execute("INSERT INTO `product` (`category_id`, `name`, `image`, `video`, `price`, `discount`, `stock`, `weight`, `length`, `width`, `height`, `composition`, `description`, `trending`, `new_arrivals`, `best_selling`, `status`) VALUES ('$CategoryId', '$Name', '$Files', '$Videofiles', '$Price', '$Discount', '$Stock', '$Weight', '$Length', '$Width', '$Height', '$Composition', '$Description', '$Trending', '$NewArrivals', '$BestSelling', '$this->Status')");
+//         $productId = $conn->lastInsertId();
+
+//         foreach ($this->Sizes as $size) {
+//             if ($size) {
+//                 $conn->execute("INSERT INTO `product_sizes` (`product_id`, `size`) VALUES ('$productId', '$size')");
+//             }
+//         }
+
+//         foreach ($this->Lists as $list) {
+//             if ($list) {
+//                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$productId', '$list')");
+//             }
+//         }
+
+//         foreach ($this->DeliveryOptions as $option) {
+//             if (!empty($option['location']) && !empty($option['type']) && !empty($option['time']) && !empty($option['cost'])) {
+//                 $location = $conn->addStr($option['location']);
+//                 $type = $conn->addStr($option['type']);
+//                 $time = $conn->addStr($option['time']);
+//                 $cost = $conn->addStr($option['cost']);
+//                 $conn->execute("INSERT INTO `product_delivery_options` (`product_id`, `delivery_location`, `delivery_type`, `delivery_time`, `cost`) VALUES ('$productId', '$location', '$type', '$time', '$cost')");
+//             }
+//         }
+
+//         foreach ($this->Colors as $colorId) {
+//             if ($colorId) {
+//                 $conn->execute("INSERT INTO `product_colors` (`product_id`, `color_id`) VALUES ('$productId', '$colorId')");
+//                 foreach ($this->ColorImages[$colorId] as $image) {
+//                     if ($image) {
+//                         $conn->execute("INSERT INTO `product_images` (`product_id`, `color_id`, `image`) VALUES ('$productId', '$colorId', '$image')");
+//                     }
+//                 }
+//             }
+//         }
+
+//         return $productId;
+//     }
+
+//     function updateProducts($Id, $CategoryId, $Name, $Price, $Discount, $Stock, $Weight, $Length, $Width, $Height, $Composition, $Sizes, $Files, $Videofiles, $Description, $Lists, $DeliveryOptions, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->CategoryId = $CategoryId;
+//         $this->Name = $Name;
+//         $this->Price = $Price;
+//         $this->Discount = $Discount;
+//         $this->Stock = $Stock;
+//         $this->Weight = $Weight;
+//         $this->Length = $Length;
+//         $this->Width = $Width;
+//         $this->Height = $Height;
+//         $this->Composition = $Composition;
+//         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
+//         $this->Description = $Description;
+//         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+//         $this->DeliveryOptions = is_array($DeliveryOptions) ? $DeliveryOptions : [$DeliveryOptions];
+//         $this->Trending = $Trending;
+//         $this->NewArrivals = $NewArrivals;
+//         $this->BestSelling = $BestSelling;
+//         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
+//         $this->ColorImages = $ColorImages;
+//         $this->Files = $Files;
+//         $this->Videofiles = $Videofiles;
+//         $this->Status = $Status;
+//         $this->conndb = $conn;
+
+//         $stmt = $conn->execute("UPDATE `product` SET `category_id`='$CategoryId', `name`='$Name', `image`='$Files', `video`='$Videofiles', `price`='$Price', `discount`='$Discount', `stock`='$Stock', `weight`='$Weight', `length`='$Length', `width`='$Width', `height`='$Height', `composition`='$Composition', `description`='$Description', `trending`='$Trending', `new_arrivals`='$NewArrivals', `best_selling`='$BestSelling', `status`='$this->Status', `updated_at`=NOW() WHERE `product_id`='$Id'");
+
+//         $conn->execute("DELETE FROM `product_sizes` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_lists` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_delivery_options` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_colors` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_images` WHERE `product_id`='$Id'");
+
+//         foreach ($this->Sizes as $size) {
+//             if ($size) {
+//                 $conn->execute("INSERT INTO `product_sizes` (`product_id`, `size`) VALUES ('$Id', '$size')");
+//             }
+//         }
+
+//         foreach ($this->Lists as $list) {
+//             if ($list) {
+//                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$Id', '$list')");
+//             }
+//         }
+
+//         foreach ($this->DeliveryOptions as $option) {
+//             if (!empty($option['location']) && !empty($option['type']) && !empty($option['time']) && !empty($option['cost'])) {
+//                 $location = $conn->addStr($option['location']);
+//                 $type = $conn->addStr($option['type']);
+//                 $time = $conn->addStr($option['time']);
+//                 $cost = $conn->addStr($option['cost']);
+//                 $conn->execute("INSERT INTO `product_delivery_options` (`product_id`, `delivery_location`, `delivery_type`, `delivery_time`, `cost`) VALUES ('$Id', '$location', '$type', '$time', '$cost')");
+//             }
+//         }
+
+//         foreach ($this->Colors as $colorId) {
+//             if ($colorId) {
+//                 $conn->execute("INSERT INTO `product_colors` (`product_id`, `color_id`) VALUES ('$Id', '$colorId')");
+//                 foreach ($this->ColorImages[$colorId] as $image) {
+//                     if ($image) {
+//                         $conn->execute("INSERT INTO `product_images` (`product_id`, `color_id`, `image`) VALUES ('$Id', '$colorId', '$image')");
+//                     }
+//                 }
+//             }
+//         }
+
+//         return $stmt;
+//     }
+
+//     function getProducts($Id)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         $product = $conn->getData("SELECT * FROM `product` WHERE `product_id` = '$Id'");
+//         $sizes = $conn->getAllData("SELECT size FROM `product_sizes` WHERE `product_id` = '$Id'");
+//         $product['sizes'] = array_column($sizes, 'size');
+//         $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$Id'");
+//         $product['lists'] = array_column($lists, 'list_item');
+//         $deliveryOptions = $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$Id'");
+//         $product['delivery_options'] = $deliveryOptions;
+//         $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$Id'");
+//         $product['colors'] = array_column($colors, 'color_id');
+
+//         return $product;
+//     }
+
+//     function allProducts()
+//     {
+//         $conn = new dbClass;
+//         $this->conndb = $conn;
+
+//         $products = $conn->getAllData("SELECT * FROM `product` ORDER BY `product_id` DESC");
+
+//         foreach ($products as &$product) {
+//             $productId = $product['product_id'];
+//             $sizes = $conn->getAllData("SELECT size FROM `product_sizes` WHERE `product_id` = '$productId'");
+//             $product['sizes'] = array_column($sizes, 'size');
+//             $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$productId'");
+//             $product['lists'] = array_column($lists, 'list_item');
+//             $deliveryOptions = $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$productId'");
+//             $product['delivery_options'] = $deliveryOptions;
+//             $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$productId'");
+//             $product['colors'] = array_column($colors, 'color_id');
+//         }
+
+//         return $products;
+//     }
+
+//     function getProductImages($Id)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `product_images` WHERE `product_id` = '$Id'");
+//     }
+
+//     function getProductImagesByColor($Id, $ColorId)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `product_images` WHERE `product_id` = '$Id' AND `color_id` = '$ColorId'");
+//     }
+
+//     function getDeliveryOptions($Id)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT delivery_location, delivery_type, delivery_time, cost FROM `product_delivery_options` WHERE `product_id` = '$Id'");
+//     }
+
+//     function getallColor()
+//     {
+//         $conn = new dbClass;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `color` WHERE `status` = 1 ORDER BY `id` DESC");
+//     }
+// }
+// class Products
+// {
+//     private $Id;
+//     private $CategoryId;
+//     private $Name;
+//     private $Price;
+//     private $Discount;
+//     private $Stock;
+//     private $Files;
+//     private $Sizes;
+//     private $Videofiles;
+//     private $Description;
+//     private $Lists;
+//     private $Trending;
+//     private $NewArrivals;
+//     private $BestSelling;
+//     private $Colors;
+//     private $ColorImages;
+//     private $Status;
+//     private $conndb;
+
+//     function addProducts($CategoryId, $Name, $Price, $Discount, $Stock, $Sizes, $Files, $Videofiles, $Description, $Lists, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+//     {
+//         $conn = new dbClass;
+//         $this->CategoryId = $CategoryId;
+//         $this->Name = $Name;
+//         $this->Price = $Price;
+//         $this->Discount = $Discount;
+//         $this->Stock = $Stock;
+//         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
+//         $this->Description = $Description;
+//         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+//         $this->Trending = $Trending;
+//         $this->NewArrivals = $NewArrivals;
+//         $this->BestSelling = $BestSelling;
+//         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
+//         $this->ColorImages = $ColorImages;
+//         $this->Status = $Status;
+//         $this->Files = $Files;
+//         $this->Videofiles = $Videofiles;
+//         $this->conndb = $conn;
+
+//         $stmt = $conn->execute("INSERT INTO `product` (`category_id`, `name`, `image`, `video`, `price`, `discount`, `stock`, `description`, `trending`, `new_arrivals`, `best_selling`, `status`) VALUES ('$CategoryId', '$Name', '$Files', '$Videofiles', '$Price', '$Discount', '$Stock', '$Description', '$Trending', '$NewArrivals', '$BestSelling', '$this->Status')");
+//         $productId = $conn->lastInsertId();
+
+//         foreach ($this->Sizes as $size) {
+//             if ($size) {
+//                 $conn->execute("INSERT INTO `product_sizes` (`product_id`, `size`) VALUES ('$productId', '$size')");
+//             }
+//         }
+
+//         foreach ($this->Lists as $list) {
+//             if ($list) {
+//                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$productId', '$list')");
+//             }
+//         }
+
+//         foreach ($this->Colors as $colorId) {
+//             if ($colorId) {
+//                 $conn->execute("INSERT INTO `product_colors` (`product_id`, `color_id`) VALUES ('$productId', '$colorId')");
+//                 foreach ($this->ColorImages[$colorId] as $image) {
+//                     if ($image) {
+//                         $conn->execute("INSERT INTO `product_images` (`product_id`, `color_id`, `image`) VALUES ('$productId', '$colorId', '$image')");
+//                     }
+//                 }
+//             }
+//         }
+
+//         return $productId;
+//     }
+
+//     function updateProducts($Id, $CategoryId, $Name, $Price, $Discount, $Stock, $Sizes, $Files, $Videofiles, $Description, $Lists, $Trending, $NewArrivals, $BestSelling, $Status, $Colors, $ColorImages)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->CategoryId = $CategoryId;
+//         $this->Name = $Name;
+//         $this->Price = $Price;
+//         $this->Discount = $Discount;
+//         $this->Stock = $Stock;
+//         $this->Sizes = is_array($Sizes) ? $Sizes : [$Sizes];
+//         $this->Description = $Description;
+//         $this->Lists = is_array($Lists) ? $Lists : [$Lists];
+//         $this->Trending = $Trending;
+//         $this->NewArrivals = $NewArrivals;
+//         $this->BestSelling = $BestSelling;
+//         $this->Colors = is_array($Colors) ? $Colors : [$Colors];
+//         $this->ColorImages = $ColorImages;
+//         $this->Files = $Files;
+//         $this->Videofiles = $Videofiles;
+//         $this->Status = $Status;
+//         $this->conndb = $conn;
+
+//         $stmt = $conn->execute("UPDATE `product` SET `category_id`='$CategoryId', `name`='$Name', `image`='$Files', `video`='$Videofiles', `price`='$Price', `discount`='$Discount', `stock`='$Stock', `description`='$Description', `trending`='$Trending', `new_arrivals`='$NewArrivals', `best_selling`='$BestSelling', `status`='$this->Status', `updated_at`=NOW() WHERE `product_id`='$Id'");
+
+//         $conn->execute("DELETE FROM `product_sizes` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_lists` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_colors` WHERE `product_id`='$Id'");
+//         $conn->execute("DELETE FROM `product_images` WHERE `product_id`='$Id'");
+
+//         foreach ($this->Sizes as $size) {
+//             if ($size) {
+//                 $conn->execute("INSERT INTO `product_sizes` (`product_id`, `size`) VALUES ('$Id', '$size')");
+//             }
+//         }
+
+//         foreach ($this->Lists as $list) {
+//             if ($list) {
+//                 $conn->execute("INSERT INTO `product_lists` (`product_id`, `list_item`) VALUES ('$Id', '$list')");
+//             }
+//         }
+
+//         foreach ($this->Colors as $colorId) {
+//             if ($colorId) {
+//                 $conn->execute("INSERT INTO `product_colors` (`product_id`, `color_id`) VALUES ('$Id', '$colorId')");
+//                 foreach ($this->ColorImages[$colorId] as $image) {
+//                     if ($image) {
+//                         $conn->execute("INSERT INTO `product_images` (`product_id`, `color_id`, `image`) VALUES ('$Id', '$colorId', '$image')");
+//                     }
+//                 }
+//             }
+//         }
+
+//         return $stmt;
+//     }
+
+//     function getProducts($Id)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         $product = $conn->getData("SELECT * FROM `product` WHERE `product_id` = '$Id'");
+//         $sizes = $conn->getAllData("SELECT size FROM `product_sizes` WHERE `product_id` = '$Id'");
+//         $product['sizes'] = array_column($sizes, 'size');
+//         $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$Id'");
+//         $product['lists'] = array_column($lists, 'list_item');
+//         $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$Id'");
+//         $product['colors'] = array_column($colors, 'color_id');
+
+//         return $product;
+//     }
+
+//     function allProducts()
+//     {
+//         $conn = new dbClass;
+//         $this->conndb = $conn;
+
+//         $products = $conn->getAllData("SELECT * FROM `product` ORDER BY `product_id` DESC");
+
+//         foreach ($products as &$product) {
+//             $productId = $product['product_id'];
+//             $sizes = $conn->getAllData("SELECT size FROM `product_sizes` WHERE `product_id` = '$productId'");
+//             $product['sizes'] = array_column($sizes, 'size');
+//             $lists = $conn->getAllData("SELECT list_item FROM `product_lists` WHERE `product_id` = '$productId'");
+//             $product['lists'] = array_column($lists, 'list_item');
+//             $colors = $conn->getAllData("SELECT color_id FROM `product_colors` WHERE `product_id` = '$productId'");
+//             $product['colors'] = array_column($colors, 'color_id');
+//         }
+
+//         return $products;
+//     }
+
+//     function getProductImages($Id)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `product_images` WHERE `product_id` = '$Id'");
+//     }
+
+//     function getProductImagesByColor($Id, $ColorId)
+//     {
+//         $conn = new dbClass;
+//         $this->Id = $Id;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `product_images` WHERE `product_id` = '$Id' AND `color_id` = '$ColorId'");
+//     }
+
+//     function getallColor()
+//     {
+//         $conn = new dbClass;
+//         $this->conndb = $conn;
+
+//         return $conn->getAllData("SELECT * FROM `color` WHERE `status` = 1 ORDER BY `id` DESC");
+//     }
+// }
     
 // class Products
 // {
@@ -1293,39 +1785,44 @@ class Color
             return $stmt;
         }	
     }
-    class Testimonials
+
+class Testimonials
 {
     private $ID;
     private $Name;
     private $Testimonial;
     private $Image;
     private $Status;
+    private $Rating;
+    private $Heading; // Added new property for heading
     private $conndb;
 
-    function addTestimonials($Name, $Testimonial, $Image, $Status)
+    function addTestimonials($Name, $Testimonial, $Status, $Rating, $Heading)
     {  
         $conn = new dbClass;
         $this->Name = $Name;
         $this->Testimonial = $Testimonial;
-        $this->Image = $Image;
         $this->Status = $Status;
+        $this->Rating = $Rating;
+        $this->Heading = $Heading;
         $this->conndb = $conn;
 
-        $stmt = $conn->execute("INSERT INTO `testimonial` (`name`, `testimonial`, `image`, `status`) VALUES ('$Name', '$Testimonial', '$Image', '$Status')");
+        $stmt = $conn->execute("INSERT INTO `testimonial` (`name`, `testimonial`, `status`, `rating`, `heading`) VALUES ('$Name', '$Testimonial', '$Status', '$Rating', '$Heading')");
         return $stmt;
     }
 
-    function updateTestimonials($Name, $Testimonial, $Image, $Status, $ID)
+    function updateTestimonials($Name, $Testimonial, $Status, $Rating, $Heading, $ID)
     {  
         $conn = new dbClass;
         $this->ID = $ID;
         $this->Name = $Name;
         $this->Testimonial = $Testimonial;
-        $this->Image = $Image;
         $this->Status = $Status;
+        $this->Rating = $Rating;
+        $this->Heading = $Heading;
         $this->conndb = $conn;
 
-        $stmt = $conn->execute("UPDATE `testimonial` SET `name` = '$Name', `testimonial` = '$Testimonial', `image` = '$Image', `status` = '$Status', `updated_at` = now() WHERE `id` = '$ID'");
+        $stmt = $conn->execute("UPDATE `testimonial` SET `name` = '$Name', `testimonial` = '$Testimonial', `status` = '$Status', `rating` = '$Rating', `heading` = '$Heading', `updated_at` = now() WHERE `id` = '$ID'");
         return $stmt;
     }
 

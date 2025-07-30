@@ -130,7 +130,7 @@ class Cart
 	// 	return $stmt;
 	// }
 
-	function addCartItem($userId, $ProductId, $Quantity, $IpAddress)
+	function addCartItem($userId, $ProductId, $Quantity,$size, $color, $IpAddress)
 	{
 		$conn = new dbClass;
 		$this->userId = $userId;
@@ -142,17 +142,17 @@ class Cart
 		if (isset($_SESSION['USER_LOGIN'])) {
 			$customerId = $_SESSION['USER_LOGIN'];
 			//cart
-			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, insert_ip, customer_id, type) 
-									VALUES ('$userId', '$ProductId', '$Quantity', '$IpAddress', '$customerId','cart')");
+			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, size, color, insert_ip, customer_id, type) 
+									VALUES ('$userId', '$ProductId', '$Quantity', '$size', '$color', '$IpAddress', '$customerId','cart')");
 		} else {
 			//cart
-			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, insert_ip, type) 
-									VALUES ('$userId', '$ProductId', '$Quantity', '$IpAddress', 'cart')");
+			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, size, color, insert_ip, type) 
+									VALUES ('$userId', '$ProductId', '$Quantity', '$size', '$color', '$IpAddress', 'cart')");
 		}
 
 		return $stmt;
 	}
-	function addBuyNowItem($userId, $ProductId, $Quantity, $IpAddress)
+	function addBuyNowItem($userId, $ProductId, $Quantity, $size, $color, $IpAddress)
 	{
 		$conn = new dbClass;
 		$this->userId = $userId;
@@ -166,21 +166,21 @@ class Cart
 			//buy_now
 			$conn->execute("DELETE from `cart` where `customer_id` = '$customerId' AND `type`='buyNow' ");
 			//buy_now
-			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, insert_ip, customer_id,type) 
-									VALUES ('$userId', '$ProductId', '$Quantity', '$IpAddress', '$customerId', 'buyNow')");
+			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, size, color, insert_ip, customer_id,type) 
+									VALUES ('$userId', '$ProductId', '$Quantity', '$size', '$color', '$IpAddress', '$customerId', 'buyNow')");
 		} else {
 			//buy_now
 			$conn->execute("DELETE  from `cart` where `insert_ip` = '$IpAddress' AND `type`='buyNow' ");
 			//buy_now
-			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, insert_ip,type) 
-									VALUES ('$userId', '$ProductId', '$Quantity', '$IpAddress', 'buyNow')");
+			$stmt = $conn->execute("INSERT INTO cart(user_id, product_id, quantity, size, color, insert_ip,type) 
+									VALUES ('$userId', '$ProductId', '$Quantity', '$size', '$color', '$IpAddress', 'buyNow')");
 		}
 
 		return $stmt;
 	}
 
 
-	function updateCartItem($userId, $ProductId, $Quantity, $IpAddress, $cartId)
+	function updateCartItem($userId, $ProductId, $Quantity, $size, $color, $IpAddress, $cartId)
 	{
 		$conn = new dbClass;
 		$this->userId = $userId;
@@ -190,13 +190,23 @@ class Cart
 		$this->cartId = $cartId;
 		$this->conndb = $conn;
 
-			$stmt = $conn->execute("UPDATE `cart` SET `user_id` = '$userId', `product_id` = '$ProductId', `quantity` = '$Quantity', `insert_ip` = '$IpAddress', `updated_at` = NOW() WHERE `cart_id` = '$cartId'");
+			$stmt = $conn->execute("UPDATE `cart` SET `user_id` = '$userId', `product_id` = '$ProductId', `quantity` = '$Quantity', `size` = '$size', `color` = '$color', `insert_ip` = '$IpAddress', `updated_at` = NOW() WHERE `cart_id` = '$cartId'");
 		return $stmt;
 		
 	}
+		function updateCartItem1234($userId,$ProductId,$Quantity,$cartId) 
+	{  
+		$conn = new dbClass;
+		$this->ProductId = $ProductId;
+		$this->Quantity = $Quantity;
+		$this->cartId = $cartId;
+		$this->conndb = $conn;
+		$stmt = $conn->execute("UPDATE `cart` SET `product_id` = '$ProductId', `quantity` = '$Quantity',  `updated_at` = NOW() WHERE `user_id` = '$userId' AND `cart_id` = '$cartId'");
+		return $stmt;
+	}
 
 
-	function updateCartItem123($userId, $ProductId, $Quantity, $cartId)
+	function updateCartItem123($userId, $ProductId, $Quantity, $size, $color, $cartId)
 	{
 		$conn = new dbClass;
 		$this->ProductId = $ProductId;
@@ -204,7 +214,7 @@ class Cart
 		$this->cartId = $cartId;
 		$this->conndb = $conn;
 
-			$stmt = $conn->execute("UPDATE `cart` SET `user_id` = '$userId', `product_id` = '$ProductId', `quantity` = '$Quantity',  `updated_at` = NOW() WHERE `cart_id` = '$cartId'");
+			$stmt = $conn->execute("UPDATE `cart` SET `user_id` = '$userId', `product_id` = '$ProductId', `quantity` = '$Quantity', `size` = '$size', `color` = '$color', `updated_at` = NOW() WHERE `cart_id` = '$cartId'");
 		return $stmt;
 	}
 

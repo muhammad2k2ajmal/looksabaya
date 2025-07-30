@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#sidebarFaq" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarFaq">
                             <i class="fas fa-question-circle menu-icon"></i>
@@ -78,7 +78,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="view-notice.php">
                             <i class="fas fa-bell menu-icon"></i>

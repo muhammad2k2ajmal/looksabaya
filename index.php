@@ -1,4 +1,26 @@
-﻿<!DOCTYPE html>
+﻿<?php
+if (!isset($_SESSION)) {
+	session_start();
+}
+error_reporting(E_ALL);
+require "config/config.php";
+require "config/common.php";
+include_once('config/cart.php');
+
+$conn = new dbClass();
+$common = new CommProducts();
+$category=new Categories();
+$banners = $common->getAllBanners();
+$testimonials = $common->getAllTestimonials();
+$newProducts = $common->getAllNewProduct();
+$videoProducts = $common->getAllVideoProduct();
+$bestSellingProducts = $common->getAllBestSellingProduct();
+$trendingProducts = $common->getAllTrendingProduct();
+$categories=$common->getAllCategoriesWithProducts();
+// var_dump($subCategories);
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,101 +45,52 @@
 		<main>
 			<section class="introBlock position-relative overflow-hidden w-100">
 				<div class="ibSlider">
-					<div>
-						<article class="ibsColumn w-100 d-flex overflow-hidden position-relative">
-							<div class="d-flex alignHolder w-100">
-								<div class="ahAlign w-100 py-7 my-auto px-sm-10 px-lg-20">
-									<div class="container">
-										<div class="ibsAnim ibsAnim1">
-											<h1>Timeless Elegance</h1>
-										</div>
-										<div class="ibsAnim ibsAnim2">
-											<p>For Your Perfect Day</p>
-										</div>
-										<div class="ibsAnim ibsAnim3">
-											<a href="looksabaya-products.html" class="btn btnThemeOutlined" data-hover="Shop Now">
-												<span class="btnText">Shop Now</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<span class="position-absolute w-100 h-100 bgCover ibBgImage"
-								style="background-image: url('images/img001.jpg');"></span>
-						</article>
-					</div>
-					<div>
-						<article class="ibsColumn w-100 d-flex overflow-hidden position-relative">
-							<div class="d-flex alignHolder w-100">
-								<div class="ahAlign w-100 py-7 my-auto px-sm-10 px-lg-20">
-									<div class="container">
-										<div class="ibsAnim ibsAnim1">
-											<h1>Summer Breeze, Abaya Ease</h1>
-										</div>
-										<div class="ibsAnim ibsAnim2">
-											<p>New Collection Out Now</p>
-										</div>
-										<div class="ibsAnim ibsAnim3">
-											<a href="looksabaya-products.html" class="btn btnThemeOutlined" data-hover="Shop Now">
-												<span class="btnText">Shop Now</span>
-											</a>
+					<?php foreach ($banners as $bannerRow): ?>
+
+						<div>
+							<article class="ibsColumn w-100 d-flex overflow-hidden position-relative">
+								<div class="d-flex alignHolder w-100">
+									<div class="ahAlign w-100 py-7 my-auto px-sm-10 px-lg-20">
+										<div class="container">
+											<div class="ibsAnim ibsAnim1">
+												<h1><?= $bannerRow['heading']??''; ?></h1>
+											</div>
+											<div class="ibsAnim ibsAnim2">
+												<p><?= $bannerRow['subheading']; ?></p>
+											</div>
+											<div class="ibsAnim ibsAnim3">
+												<a href="<?= $bannerRow['button_link']; ?>" class="btn btnThemeOutlined" data-hover="Shop Now">
+													<span class="btnText">Shop Now</span>
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<span class="position-absolute w-100 h-100 bgCover ibBgImage"
-								style="background-image: url('images/img002.jpg');"></span>
-						</article>
-					</div>
-					<div>
-						<article class="ibsColumn w-100 d-flex overflow-hidden position-relative">
-							<div class="d-flex alignHolder w-100">
-								<div class="ahAlign w-100 py-7 my-auto px-sm-10 px-lg-20">
-									<div class="container">
-										<div class="ibsAnim ibsAnim1">
-											<h1>NEW HIJAB COLLECTION</h1>
-										</div>
-										<div class="ibsAnim ibsAnim2">
-											<p>New Colours/New Fabrics</p>
-										</div>
-										<div class="ibsAnim ibsAnim3">
-											<a href="looksabaya-products.html" class="btn btnThemeOutlined" data-hover="Shop Now">
-												<span class="btnText">Shop Now</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<span class="position-absolute w-100 h-100 bgCover ibBgImage"
-								style="background-image: url('images/img003.jpg');"></span>
-						</article>
-					</div>
+								<span class="position-absolute w-100 h-100 bgCover ibBgImage"
+									style="background-image: url('adminuploads/banner/<?= $bannerRow['image']; ?>');"></span>
+							</article>
+						</div>
+					<?php endforeach; ?>
 				</div>
 			</section>
 			<aside class="position-relative bannersAsideBlock overflow-hidden w-100 py-6">
 				<div class="container">
 					<div class="row justify-content-center ">
-						<div class="col-xl-4 col-md-6 col-sm-12 mb-5">
-							<a href="looksabaya-products.html">
-								<img src="images/image2.jpg" alt="" class="img-fluid">
-							</a>
-						</div>
-						<div class="col-xl-4 col-md-6   col-sm-12 mb-5 ">
-							<a href="looksabaya-products.html">
-								<img src="images/image.jpg" alt="" class=" img-fluid">
-							</a>
-						</div>
-						<div class="col-xl-4 col-md-6  col-sm-12 ">
-							<a href="looksabaya-products.html">
-								<img src="images/image1.jpg" alt="" class=" img-fluid">
-							</a>
-						</div>
+						<?php
+						
+						foreach ($categories as $categorieRow): ?>
+							<div class="col-xl-4 col-md-6 col-sm-12 mb-5">
+								<a href="looksabaya-products.php?cid=<?= base64_encode($categorieRow['id'])?>">
+									<img src="adminuploads/products/<?= $categorieRow['image']; ?>" alt="" class="img-fluid">
+								</a>
+							</div>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</aside>
 
 
-
+<!-- best selling products -->
 			<section class="collectionBlock position-relative w-100 overflow-hidden pb-6">
 				<div class="container">
 					<header class="headingHead text-center mb-5 mt-1">
@@ -127,121 +100,36 @@
 					</header>
 					<div class="slidersColsHolder">
 						<div class="cbSlider">
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-1.jpg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
+							<?php foreach($bestSellingProducts as $productRow):?>
+								<div class="schCol">
+									<article
+										class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
+										<div class="imgHolder mb-2">
+											<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>">
+												<img src="adminUploads/products/<?= $productRow['image'];?>" class="w-100 img-fluid"
+													alt="image description">
+											</a>
 
-									</div>
+										</div>
 
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Premium Three Piece Abaya Set with Balloon Sleeves - Smoky Mahogany
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 11,800.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-2.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Premium Classic Open Abaya with Pleated Cuff Detailing - Blushed Mink
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 8,600.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-8.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Luxury Textured Open Abaya with Tulle Lace Detailing - Navy
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 14,200.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-10.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Luxury Regal Embellished Cape - Frosted Lavender
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 15,300.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-12.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">Cross
-											Stripes</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 11,800.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
+										<h3 class="fw-light pcHeading mb-1">
+											<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>" class="text-decoration-none">
+												<?= $productRow['name'];?>
+											</a>
+										</h3>
+										<h4 class="fw-normal  mb-0">
+											<span class="regPrice">Rs. <?= number_format($productRow['price'],2);?></span>
+										</h4>
+										<button class=" position-absolute fw-medium p-0 border-0">ADD TO
+											CART</button>
+									</article>
+								</div>
+							<?php endforeach;?>
 						</div>
 					</div>
 				</div>
 			</section>
+			<!-- new arrivals -->
 			<section class="club collectionBlock position-relative w-100 overflow-hidden py-6">
 				<div class="container">
 					<header class="headingHead text-center mb-5 mt-1">
@@ -251,222 +139,68 @@
 					</header>
 					<div class="slidersColsHolder">
 						<div class="cbSlider">
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-15.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
+							<?php foreach($newProducts as $productRow):?>
+								<div class="schCol">
+									<article
+										class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
+										<div class="imgHolder mb-2">
+											<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>">
+												<img src="adminUploads/products/<?= $productRow['image'];?>" class="w-100 img-fluid"
+													alt="image description">
+											</a>
 
-									</div>
+										</div>
 
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Premium Three Piece Abaya Set with Balloon Sleeves - Smoky Mahogany
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 11,800.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-16.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
+										<h3 class="fw-light pcHeading mb-1">
+											<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>" class="text-decoration-none">
+												<?= $productRow['name']??'';?>
+											</a>
+										</h3>
+										<h4 class="fw-normal  mb-0">
+											<span class="regPrice">Rs. <?= number_format($productRow['price'],2);?></span>
+										</h4>
+										<button class=" position-absolute fw-medium p-0 border-0">ADD TO
+											CART</button>
+									</article>
+								</div>
+							<?php endforeach;?>
 
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Premium Classic Open Abaya with Pleated Cuff Detailing - Blushed Mink
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 8,600.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-18.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Luxury Textured Open Abaya with Tulle Lace Detailing - Navy
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 14,200.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-20.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">
-											Luxury Regal Embellished Cape - Frosted Lavender
-										</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 15,300.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<img src="images/best selling/p-21.jpeg" class="w-100 img-fluid"
-												alt="image description">
-										</a>
-									</div>
-
-									<h3 class="fw-light pcHeading mb-1">
-										<a href="looksabaya-products-details.html" class="text-decoration-none">Cross
-											Stripes</a>
-									</h3>
-									<h4 class="fw-normal  mb-0">
-										<span class="regPrice">Rs. 11,800.00</span>
-									</h4>
-									<button class=" position-absolute fw-medium p-0 border-0">ADD TO
-										CART</button>
-								</article>
-							</div>
+						
 						</div>
 					</div>
 				</div>
 			</section>
 
+			<!-- trending -->
 			<section class="gallery-heade py-6">
 				<header class="headingHead text-center  mt-1">
 
 					<h2
 						class="position-relative fw-normal hhHeading patternActive d-flex justify-content-center align-items-center gap-4 mb-1">
-						Trending Abayas</h2>
+						Trending Abayas
+					</h2>
 				</header>
-
-
-
 				<div class="gallery-grid">
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
+					<?php foreach($trendingProducts as $productRow):?>
+						<div class="gallery-item">
+							<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>">
 
-							<img src="images/best selling/trending.jpg" alt="Occasion Abayas">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="looksabaya-products-details.html" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
+								<img src="adminUploads/products/<?= $productRow['image'];?>" alt="Occasion Abayas">
+							</a>
+							<h5 class="fw-light pcHeading mt-2">
+								<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>" class="text-decoration-none"><?= $productRow['name'];?></a>
+							</h5>
+							<h6 class="fw-normal  mb-2">
+								<span class="regPrice">Rs. <?= number_format($productRow['price'],2);?></span>
+							</h6>
 
-					</div>
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
-
-							<img src="images/best selling/trending1.jpg" alt="Hajj Umrah Clothing">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="#0l" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
-
-
-					</div>
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
-
-							<img src="images/best selling/trending2.jpg" alt="Essential Abayas">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="looksabaya-products-details.html" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
-
-
-					</div>
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
-
-							<img src="images/best selling/trending4.jpg" alt="Hijabs">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="looksabaya-products-details.html" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
-
-
-					</div>
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
-
-							<img src="images/best selling/trending5.jpg" alt="Girls Abayas">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="looksabaya-products-details.html" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
-
-
-					</div>
-					<div class="gallery-item">
-						<a href="looksabaya-products-details.html">
-
-							<img src="images/best selling/trending3.jpg" alt="Thobes">
-						</a>
-						<h5 class="fw-light pcHeading mt-2">
-							<a href="looksabaya-products-details.html" class="text-decoration-none">Cross Stripes</a>
-						</h5>
-						<h6 class="fw-normal  mb-2">
-							<span class="regPrice">Rs. 11,800.00</span>
-						</h6>
-
-
-					</div>
-
+						</div>
+					<?php endforeach;?>
 				</div>
 			</section>
 
 
-
+			<!-- remains static -->
 			<section class="club-1 section ">
 				<div class="container">
 					<div class="row align-items-center">
@@ -506,182 +240,39 @@
 
 					<div class="slidersColsHolder">
 						<div class="nlSlider">
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
+							<?php foreach($videoProducts as $productRow):?>
+								<div class="schCol">
+									<article
+										class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
+										<div class="imgHolder mb-2">
+											<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>">
 
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video1.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-
-									</div>
-									<div>
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Premium Three Piece Abaya Set with Balloon Sleeves - Smoky Mahogany
+												<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
+													src="adminUploads/videos/<?= $productRow['video']??'';?>"
+													style="width: 260px; height: 458px; border-radius:10px;"></video>
 											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 11,600.00</span>
-										</h4>
 
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video2.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
+										</div>
+										<div>
+											<h3 class="fw-light pcHeading mb-1">
+												<a href="looksabaya-products-details.php?id=<?= base64_encode($productRow['product_id']);?>" class="text-decoration-none">
+													<?= $productRow['name'];?>
+												</a>
+											</h3>
+											<h4 class="fw-normal  mb-0">
+												<span class="regPrice">Rs. <?= number_format($productRow['price'],2);?></span>
+											</h4>
 
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Premium Classic Open Abaya with Pleated Cuff Detailing - Blushed Mink
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 8,600.00</span>
-										</h4>
-
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video3.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Luxury Textured Open Abaya with Tulle Lace Detailing - Navy
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 14,200.00</span>
-										</h4>
-
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video4.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
-
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Luxury Regal Embellished Cape - Frosted Lavender
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 15,300.00</span>
-										</h4>
-
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video5.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
-
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Luxury Regal Embellished Cape - Cross Stripes
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 11,800.00</span>
-										</h4>
-
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video6.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Premium Classic Open Abaya with Pleated Cuff Detailing - Blushed Mink
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 11,300.00</span>
-										</h4>
-										<!-- <button class=" position-absolute fw-medium p-0 border-0 w-100">ADD
-											TO
-											CART</button> -->
-									</div>
-								</article>
-							</div>
-							<div class="schCol">
-								<article
-									class="productColumn text-center text-decoration-none position-relative d-block overflow-hidden">
-									<div class="imgHolder mb-2">
-										<a href="looksabaya-products-details.html">
-
-											<video class="x1lliihq x5yr21d xh8yej3 " playsinline="" muted loop autoplay
-												src="images/video/video7.mp4"
-												style="width: 260px; height: 458px; border-radius:10px;"></video>
-										</a>
-									</div>
-									<div>
-										<h3 class="fw-light pcHeading mb-1">
-											<a href="looksabaya-products-details.html" class="text-decoration-none">
-												Smoky Mahogany
-											</a>
-										</h3>
-										<h4 class="fw-normal  mb-0">
-											<span class="regPrice">Rs. 11,300.00</span>
-										</h4>
-
-									</div>
-								</article>
-							</div>
+										</div>
+									</article>
+								</div>
+							<?php endforeach;?>
 						</div>
 					</div>
 				</div>
 			</section>
-
+		
+		<!-- testimonials  -->
 			<section class="club position-relative w-100 overflow-hidden py-6 ">
 				<div class="container">
 					<header class="headingHead text-center mb-5">
@@ -689,7 +280,37 @@
 					</header>
 					<div class="slidersColsHolder">
 						<div class="reviewsSlider">
+							<?php foreach($testimonials as $testimonialRow):?>
 							<div>
+								<div class="schCol">
+									<blockquote class="quoteColumn overflow-hidden bg-white p-8">
+										<i
+											class="qcIcn icomoon-quotes bg-black text-white rounded-circle d-flex align-items-center justify-content-center mb-4"><span
+												class="visually-hidden">"</span></i>
+										<h3 class="qcHeading fw-medium mb-2"><?= $testimonialRow['heading']??''?></h3>
+										<p><?= $testimonialRow['testimonial']??''?></p>
+										<div class="d-flex gap_1 mt-5">
+											<cite class="flex-grow-1 qcCite fw-normal"><?= $testimonialRow['name']??''?></cite>
+											<ul class="list-unstyled ratingStaticList d-flex mb-0">
+												<?php for($i=1;$i<=$testimonialRow['rating'];$i++):?>
+												<li><i class="icomoon-star"><span class="visually-hidden">rated star
+															1</span></i></li>
+												<?php endfor;
+												$dullstars=5-$testimonialRow['rating'];
+												for($i=1;$i<=$dullstars;$i++):
+													
+												?>
+
+													<li><i class="icomoon-star dull"><span class="visually-hidden">rated
+																star 5</span></i></li>
+												<?php endfor;?>
+											</ul>
+										</div>
+									</blockquote>
+								</div>
+							</div>
+							<?php endforeach;?>
+							<!-- <div>
 								<div class="schCol">
 									<blockquote class="quoteColumn overflow-hidden bg-white p-8">
 										<i
@@ -796,7 +417,7 @@
 										</div>
 									</blockquote>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

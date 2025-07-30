@@ -22,15 +22,19 @@ class dbClass
 
 	private function connect()
 	{
+		// $this->host = 'localhost';
+		// $this->dbname = 'abayalooks_db';
+		// $this->user = 'abayalooks_db';
+		// $this->pass = 'JCacE3uZBdKuK5ZEKEuK';
 		$this->host = 'localhost';
 		$this->dbname = 'abaya_db';
 		$this->user = 'root';
 		$this->pass = '';
 
 		// $this->host = 'localhost';		
-		// $this->dbname = 'seamdecor_db';
-        // $this->user = 'seamdecor_db';
-        // $this->pass = 'GxEeVmgN3uk9Sdu6XTcZ';
+		// $this->dbname = 'dotcomwala_look_db';
+        // $this->user = 'dotcomwala_look_db';
+        // $this->pass = 'm7CBc7Kpf8XrqRsbHX7U';
 
 		try {
 

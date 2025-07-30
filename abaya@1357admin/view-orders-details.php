@@ -198,9 +198,9 @@ $getShipping = $db->getData("SELECT * FROM `order_ship_address` WHERE `id` = '".
                                         </table>
                                         <h3 style="text-align: right;">Sub Total: ₹<?= $row['subtotal']; ?></h3>
 <br>
-<h3 style="text-align: right;">Coupon Code (<?= $row['coupon_code']; ?>, <?= $row['couponDiscountPercentage']; ?>%): ₹<?= $row['coupon_discount']; ?></h3>
-<h3 style="text-align: right;">Shipping Charge : ₹<?= $row['shipping_charge']; ?></h3>
-<h2 style="text-align: right;">Total Amount: ₹<?= $row['total']; ?></h2>
+<!-- <h3 style="text-align: right;">Coupon Code (<?= $row['coupon_code']; ?>, <?= $row['couponDiscountPercentage']; ?>%): ₹<?= $row['coupon_discount']; ?></h3> -->
+<h3 style="text-align: right;">Shipping Charge : ₹  <?= number_format($row['shipping_charge'], 2); ?></h3>
+<h2 style="text-align: right;">Total Amount: ₹ <?= number_format($row['total'], 2); ?></h2>
 
                                     </div>
                                 </div>

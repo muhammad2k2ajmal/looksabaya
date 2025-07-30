@@ -87,29 +87,7 @@ $auth->checkSession();
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center border-dashed-bottom pb-3">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14">Visitors</p>
-                                        <?php
-                                            $totalVisitorsCount = $db->getRowCount("SELECT id FROM `visitors_history`");
-                                        ?>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?php echo $totalVisitorsCount; ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto ho-vt">
-                                            <i class="fas fa-user-friends h1 align-self-center mb-0 text-primary"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 align-self-center text-center mt-3 ho-vt-btn">
-                                    <a href="view-visitors.php" class="btn btn-outline-primary btn-sm px-2">More Info</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                     <div class="col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
@@ -133,29 +111,7 @@ $auth->checkSession();
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center border-dashed-bottom pb-3">
-                                    <div class="col-9">
-                                        <p class="text-dark mb-0 fw-semibold fs-14">Sub Category</p>
-                                        <?php
-                                            $totalSubCategory = $db->getRowCount("SELECT id FROM `sub_category`");
-                                        ?>
-                                        <h3 class="mt-2 mb-0 fw-bold"><?php echo $totalSubCategory; ?></h3>
-                                    </div>
-                                    <div class="col-3 align-self-center">
-                                        <div class="d-flex justify-content-center align-items-center thumb-xl bg-light rounded-circle mx-auto ho-sc">
-                                            <i class="iconoir-view-grid h1 align-self-center mb-0 text-danger"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 align-self-center text-center mt-3 ho-sc-btn">
-                                    <a href="view-subcategory.php" class="btn btn-outline-danger btn-sm px-2">More Info</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">

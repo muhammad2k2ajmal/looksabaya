@@ -81,7 +81,7 @@ if (isset($_REQUEST['delete']) && $_REQUEST['delete'] == 'y') {
                                               <tr>
                                                 <th class="ps-0">S.No</th>
                                                 <th>Name</th>
-                                                <th>Phone</th>
+                                                <th>Subject</th>
                                                 <th>Email</th>
                                                 <th>Message</th>
                                                 <th>Created At</th>                                            
@@ -97,7 +97,7 @@ if (isset($_REQUEST['delete']) && $_REQUEST['delete'] == 'y') {
                                                     <tr>                                                        
                                                         <td><?php echo $i++; ?></td>
                                                         <td><?php echo ucwords($row['name']); ?></td>
-                                                        <td><?php echo $row['phone']; ?></td>
+                                                        <td><?php echo $row['subject']; ?></td>
                                                         <td><?php echo $row['email']; ?></td>                            
                                                         <td><?php echo $row['message']; ?></td>
                                                         <td><?php echo date('d-m-Y', strtotime($row['created_at'])); ?></td>

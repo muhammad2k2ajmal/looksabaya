@@ -31,15 +31,52 @@ if (isset($_REQUEST['submit'])) {
     $price = $db->addStr($_POST['price'] ?? '0');
     $discount = $db->addStr($_POST['discount'] ?? '0');
     $stock = $db->addStr($_POST['stock'] ?? '0');
+    $weight = $db->addStr($_POST['weight'] ?? '0.00');
+    $length = $db->addStr($_POST['length'] ?? '0.00');
+    $width = $db->addStr($_POST['width'] ?? '0.00');
+    $height = $db->addStr($_POST['height'] ?? '0.00');
+    $composition = $db->addStr($_POST['composition'] ?? '');
     $sizes = !empty($_POST['sizes']) && is_array($_POST['sizes']) ? $_POST['sizes'] : [];
     $description = $db->addStr($_POST['description'] ?? '');
     $lists = !empty($_POST['lists']) && is_array($_POST['lists']) ? array_filter($_POST['lists'], 'trim') : [];
+    $delivery_options = !empty($_POST['delivery_options']) && is_array($_POST['delivery_options']) ? array_filter($_POST['delivery_options'], function($option) {
+        return !empty(trim($option['option'])) && !empty(trim($option['cost']));
+    }) : [];
     $trending = $db->addStr($_POST['trending'] ?? '0');
     $new_arrivals = $db->addStr($_POST['new_arrivals'] ?? '0');
     $best_selling = $db->addStr($_POST['best_selling'] ?? '0');
     $status = $db->addStr($_POST['status'] ?? '1');
     $colors = !empty($_POST['colors']) && is_array($_POST['colors']) ? $_POST['colors'] : [];
     $color_images = [];
+
+    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $image = $_FILES['image']['name'];
+        $dest = "../adminUploads/products/";
+        $targetPath = $dest . basename($image);
+
+        // Move uploaded file
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            $files = $image; // Success
+        } else {
+            $files = '0'; // Move failed
+        }
+    } else {
+        $files = '0'; // Upload error
+    }
+    if ($_FILES['video']['error'] === UPLOAD_ERR_OK) {
+        $video = $_FILES['video']['name'];
+        $videodest = __DIR__ . '/../adminUploads/videos/';
+        $videotargetPath = $videodest . basename($video);
+
+        // Move uploaded file
+        if (move_uploaded_file($_FILES['video']['tmp_name'], $videotargetPath)) {
+            $videofiles = $video; // Success
+        } else {
+            $videofiles = '0'; // Move failed
+        }
+    } else {
+        $videofiles = '0'; // Upload error
+    }
 
     // Validate and upload color images (minimum 3, maximum 5 per color)
     foreach ($colors as $color_id) {
@@ -79,7 +116,7 @@ if (isset($_REQUEST['submit'])) {
         }
     }
 
-    $result = $products->addProducts($category_id, $name, $price, $discount, $stock, $sizes, $description, $lists, $trending, $new_arrivals, $best_selling, $status, $colors, $color_images);
+    $result = $products->addProducts($category_id, $name, $price, $discount, $stock, $weight, $length, $width, $height, $composition, $sizes, $files, $videofiles, $description, $lists, $delivery_options, $trending, $new_arrivals, $best_selling, $status, $colors, $color_images);
 
     if ($result) {
         $_SESSION['msg'] = 'Product has been created successfully.';
@@ -100,9 +137,17 @@ if (isset($_REQUEST['update'])) {
     $price = $db->addStr($_POST['price'] ?? '0');
     $discount = $db->addStr($_POST['discount'] ?? '0');
     $stock = $db->addStr($_POST['stock'] ?? '0');
+    $weight = $db->addStr($_POST['weight'] ?? '0.00');
+    $length = $db->addStr($_POST['length'] ?? '0.00');
+    $width = $db->addStr($_POST['width'] ?? '0.00');
+    $height = $db->addStr($_POST['height'] ?? '0.00');
+    $composition = $db->addStr($_POST['composition'] ?? '');
     $sizes = !empty($_POST['sizes']) && is_array($_POST['sizes']) ? $_POST['sizes'] : [];
     $description = $db->addStr($_POST['description'] ?? '');
     $lists = !empty($_POST['lists']) && is_array($_POST['lists']) ? array_filter($_POST['lists'], 'trim') : [];
+    $delivery_options = !empty($_POST['delivery_options']) && is_array($_POST['delivery_options']) ? array_filter($_POST['delivery_options'], function($option) {
+        return !empty(trim($option['option'])) && !empty(trim($option['cost']));
+    }) : [];
     $trending = $db->addStr($_POST['trending'] ?? '0');
     $new_arrivals = $db->addStr($_POST['new_arrivals'] ?? '0');
     $best_selling = $db->addStr($_POST['best_selling'] ?? '0');
@@ -110,6 +155,86 @@ if (isset($_REQUEST['update'])) {
     $colors = !empty($_POST['colors']) && is_array($_POST['colors']) ? $_POST['colors'] : [];
     $color_images = [];
 
+    $oldimage = $_POST['oldimage'];
+    $dest = "../adminUploads/products/";
+
+    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $image = $_FILES['image']['name'];
+        $tmp_name = $_FILES['image']['tmp_name'];
+        $targetPath = $dest . basename($image);
+
+        // Move the uploaded file
+        if (move_uploaded_file($tmp_name, $targetPath)) {
+            // Delete old image if it exists and is not the same as new
+            if ($oldimage && file_exists($dest . $oldimage) && $oldimage !== $image) {
+                unlink($dest . $oldimage);
+            }
+            $files = $image;
+        } else {
+            $_SESSION['errmsg'] = 'Error uploading file.';
+            header("Location: view-products.php");
+            exit;
+        }
+    } else {
+        // If no new file uploaded, retain old image
+        $files = $oldimage;
+    }
+$oldvideo = $_POST['oldvideo'] ?? ''; // Ensure oldvideo is set
+$videodest = __DIR__ . '/../adminUploads/videos/'; // Use absolute path
+
+// Ensure the target directory exists
+if (!is_dir($videodest)) {
+    if (!mkdir($videodest, 0755, true)) {
+        $_SESSION['errmsg'] = 'Failed to create video upload directory.';
+        header("Location: view-products.php");
+        exit;
+    }
+}
+
+// Check if the directory is writable
+if (!is_writable($videodest)) {
+    $_SESSION['errmsg'] = 'Video upload directory is not writable.';
+    header("Location: view-products.php");
+    exit;
+}
+
+if ($_FILES['video']['error'] === UPLOAD_ERR_OK) {
+    $video = $_FILES['video']['name'];
+    $tmp_name = $_FILES['video']['tmp_name'];
+
+    // Sanitize the file name
+    $video = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', basename($video));
+    $videotargetPath = $videodest . $video;
+
+    // Move the uploaded file
+    if (move_uploaded_file($tmp_name, $videotargetPath)) {
+        // Delete old video if it exists and is different from the new one
+        if ($oldvideo && file_exists($videodest . $oldvideo) && $oldvideo !== $video) {
+            unlink($videodest . $oldvideo);
+        }
+        $videofiles = $video;
+    } else {
+        // Get the specific error for why move_uploaded_file failed
+        $error = error_get_last();
+        $_SESSION['errmsg'] = 'Error uploading video: ' . ($error['message'] ?? 'Unknown error');
+        header("Location: view-products.php");
+        exit;
+    }
+} else {
+    // Handle upload errors
+    $upload_errors = [
+        UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive.',
+        UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive.',
+        UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded.',
+        UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
+        UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
+        UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
+        UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload.',
+    ];
+    $error_code = $_FILES['video']['error'];
+    $_SESSION['errmsg'] = $upload_errors[$error_code] ?? 'Unknown upload error.';
+    $videofiles = $oldvideo; // Keep old video if no new file uploaded
+}
     // Validate and upload color images (minimum 3, maximum 5 per color, including existing images)
     foreach ($colors as $color_id) {
         $existingImages = $products->getProductImagesByColor($id, $color_id);
@@ -150,7 +275,7 @@ if (isset($_REQUEST['update'])) {
         }
     }
 
-    $result = $products->updateProducts($id, $category_id, $name, $price, $discount, $stock, $sizes, $description, $lists, $trending, $new_arrivals, $best_selling, $status, $colors, $color_images);
+    $result = $products->updateProducts($id, $category_id, $name, $price, $discount, $stock, $weight, $length, $width, $height, $composition, $sizes, $files, $videofiles, $description, $lists, $delivery_options, $trending, $new_arrivals, $best_selling, $status, $colors, $color_images);
 
     if ($result) {
         $_SESSION['msg'] = 'Product has been updated successfully.';
@@ -302,6 +427,54 @@ if (isset($_REQUEST['update'])) {
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-5">
+                                            <label class="form-label" for="weight">Weight (kg)</label>
+                                            <input name="weight" type="number" step="0.01" class="form-control" id="weight" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="length">Length (cm)</label>
+                                            <input name="length" type="number" step="0.01" class="form-control" id="length" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="width">Width (cm)</label>
+                                            <input name="width" type="number" step="0.01" class="form-control" id="width" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="height">Height (cm)</label>
+                                            <input name="height" type="number" step="0.01" class="form-control" id="height" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="composition">Composition</label>
+                                            <input name="composition" type="text" class="form-control" id="composition" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 d-flex align-items-center">
+                                        <div class="col-md-5">
+                                            <label class="form-label">Image (Size: 1000px * 1000px)</label>
+                                            <input name="image" type="file" class="form-control" id="image" onChange="PreviewImage();" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <img id="uploadPreview" style="height: 130px;">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 d-flex align-items-center">
+                                        <div class="col-md-5">
+                                            <label class="form-label">Video (Format: MP4, WebM)</label>
+                                            <input name="video" type="file" class="form-control" id="video" accept="video/mp4,video/webm" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <video id="videoPreview" controls style="height: 130px; display: none;"></video>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
                                             <label class="form-label">Sizes</label>
                                             <div class="checkbox">
                                                 <?php foreach ([52, 54, 56, 58] as $size): ?>
@@ -325,6 +498,22 @@ if (isset($_REQUEST['update'])) {
                                         </div>
                                         <div class="col-md-3">
                                             <a href="javascript:void(0);" class="btn btn-success add_button" title="Add field">Add More</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 delivery_wrapper">
+                                        <div class="col-md-10">
+                                            <label class="form-label" for="delivery_options">Delivery Options</label>
+                                            <div class="row mb-2 delivery_option_row">
+                                                <div class="col-md-8">
+                                                    <input name="delivery_options[0][option]" type="text" class="form-control" placeholder="Delivery Option (e.g., India, First Class, 2-3 working days)">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input name="delivery_options[0][cost]" type="number" step="0.01" class="form-control" placeholder="Cost (e.g., 500.00)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0);" class="btn btn-success add_delivery_button" title="Add delivery option">Add More</a>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -414,6 +603,56 @@ if (isset($_REQUEST['update'])) {
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-5">
+                                            <label class="form-label" for="weight">Weight (kg)</label>
+                                            <input name="weight" type="number" step="0.01" class="form-control" id="weight" value="<?php echo htmlspecialchars($editval['weight']); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="length">Length (cm)</label>
+                                            <input name="length" type="number" step="0.01" class="form-control" id="length" value="<?php echo htmlspecialchars($editval['length']); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="width">Width (cm)</label>
+                                            <input name="width" type="number" step="0.01" class="form-control" id="width" value="<?php echo htmlspecialchars($editval['width']); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="height">Height (cm)</label>
+                                            <input name="height" type="number" step="0.01" class="form-control" id="height" value="<?php echo htmlspecialchars($editval['height']); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label class="form-label" for="composition">Composition</label>
+                                            <input name="composition" type="text" class="form-control" id="composition" value="<?php echo htmlspecialchars($editval['composition']); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 d-flex align-items-center">
+                                        <div class="col-md-5">
+                                            <label class="form-label">Image (Size: 1000px * 1000px)</label>
+                                            <input name="image" type="file" class="form-control" id="image" onChange="PreviewImage();">
+                                            <input type="hidden" name="oldimage" value="<?php echo $editval['image']; ?>" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <img src="../adminUploads/products/<?php echo $editval['image']; ?>" id="uploadPreview" style="height: 130px;">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 d-flex align-items-center">
+                                        <div class="col-md-5">
+                                            <label class="form-label">Video (Format: MP4, WebM)</label>
+                                            <input name="video" type="file" class="form-control" id="video" accept="video/mp4,video/webm">
+                                            <input type="hidden" name="oldvideo" value="<?php echo $editval['video']; ?>" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <video id="videoPreview" src="../adminUploads/videos/<?php echo $editval['video']; ?>" controls style="height: 130px; <?php echo empty($editval['video']) ? 'display:none;' : ''; ?>"></video>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
                                             <label class="form-label">Sizes</label>
                                             <div class="checkbox">
                                                 <?php foreach ([52, 54, 56, 58] as $size): ?>
@@ -449,6 +688,40 @@ if (isset($_REQUEST['update'])) {
                                         </div>
                                         <div class="col-md-3">
                                             <a href="javascript:void(0);" class="btn btn-success add_button" title="Add field">Add More</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 delivery_wrapper">
+                                        <div class="col-md-10">
+                                            <label class="form-label" for="delivery_options">Delivery Options</label>
+                                            <?php
+                                            $deliveryOptions = $products->getDeliveryOptions($id);
+                                            foreach ($deliveryOptions as $index => $option):
+                                                // Combine the delivery option fields for display
+                                                $combinedOption = htmlspecialchars($option['delivery_location'] . ', ' . $option['delivery_type'] . ', ' . $option['delivery_time']);
+                                            ?>
+                                                <div class="row mb-2 delivery_option_row">
+                                                    <div class="col-md-8">
+                                                        <input name="delivery_options[<?php echo $index; ?>][option]" type="text" class="form-control" value="<?php echo $combinedOption; ?>" placeholder="Delivery Option (e.g., India, First Class, 2-3 working days)">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input name="delivery_options[<?php echo $index; ?>][cost]" type="number" step="0.01" class="form-control" value="<?php echo htmlspecialchars($option['cost']); ?>" placeholder="Cost (e.g., 500.00)">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a href="javascript:void(0);" class="btn btn-danger remove_delivery_button" title="Remove delivery option">Remove</a>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                            <div class="row mb-2 delivery_option_row">
+                                                <div class="col-md-8">
+                                                    <input name="delivery_options[<?php echo count($deliveryOptions); ?>][option]" type="text" class="form-control" placeholder="Delivery Option (e.g., India, First Class, 2-3 working days)">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input name="delivery_options[<?php echo count($deliveryOptions); ?>][cost]" type="number" step="0.01" class="form-control" placeholder="Cost (e.g., 500.00)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0);" class="btn btn-success add_delivery_button" title="Add delivery option">Add More</a>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -684,7 +957,7 @@ if (isset($_REQUEST['update'])) {
                         // Remove from database via AJAX
                         if (confirm('Are you sure to remove this image?')) {
                             $.ajax({
-                                url: 'get-values.php',
+                                url: 'get-values',
                                 type: 'GET',
                                 data: { deleteImages: 'deleteImages', image_id: imageId },
                                 success: function () {
@@ -732,6 +1005,31 @@ if (isset($_REQUEST['update'])) {
                 x--;
             });
 
+            // Add more delivery options
+            var maxDeliveryFields = 10;
+            var addDeliveryButton = $('.add_delivery_button');
+            var deliveryWrapper = $('.delivery_wrapper');
+            var deliveryFieldHTML = '<div class="row mb-2 delivery_option_row">' +
+                '<div class="col-md-8"><input name="delivery_options[INDEX][option]" type="text" class="form-control" placeholder="Delivery Option (e.g., India, First Class, 2-3 working days)"></div>' +
+                '<div class="col-md-2"><input name="delivery_options[INDEX][cost]" type="number" step="0.01" class="form-control" placeholder="Cost (e.g., 500.00)"></div>' +
+                '<div class="col-md-1"><a href="javascript:void(0);" class="btn btn-danger remove_delivery_button" title="Remove delivery option">Remove</a></div>' +
+                '</div>';
+
+            var y = <?php echo empty($id) ? 1 : count($deliveryOptions) + 1; ?>;
+            $(addDeliveryButton).click(function () {
+                if (y < maxDeliveryFields) {
+                    var newFieldHTML = deliveryFieldHTML.replace(/INDEX/g, y);
+                    $(deliveryWrapper).find('.delivery_option_row').last().after(newFieldHTML);
+                    y++;
+                }
+            });
+
+            $(deliveryWrapper).on('click', '.remove_delivery_button', function (e) {
+                e.preventDefault();
+                $(this).closest('.delivery_option_row').remove();
+                y--;
+            });
+
             // Form validation
             $("#product-form1, #product-form2").validate({
                 rules: {
@@ -739,10 +1037,17 @@ if (isset($_REQUEST['update'])) {
                     name: { required: true, maxlength: 200 },
                     price: { required: true },
                     stock: { required: true },
+                    weight: { required: true },
+                    length: { required: true },
+                    width: { required: true },
+                    height: { required: true },
+                    composition: { required: true },
                     description: { required: true },
                     status: { required: true },
                     'colors[]': { required: true },
-                    'sizes[]': { required: true }
+                    'sizes[]': { required: true },
+                    'delivery_options[0][option]': { required: true },
+                    'delivery_options[0][cost]': { required: true }
                 },
                 messages: {
                     category_id: "Please select a category.",
@@ -752,10 +1057,17 @@ if (isset($_REQUEST['update'])) {
                     },
                     price: "Please enter price.",
                     stock: "Please enter stock.",
+                    weight: "Please enter weight.",
+                    length: "Please enter length.",
+                    width: "Please enter width.",
+                    height: "Please enter height.",
+                    composition: "Please enter composition.",
                     description: "Please enter description.",
                     status: "Please select a status.",
                     'colors[]': "Please select at least one color.",
-                    'sizes[]': "Please select at least one size."
+                    'sizes[]': "Please select at least one size.",
+                    'delivery_options[0][option]': "Please enter delivery option.",
+                    'delivery_options[0][cost]': "Please enter delivery cost."
                 },
                 errorClass: "is-invalid",
                 validClass: "is-valid",
@@ -797,5 +1109,27 @@ if (isset($_REQUEST['update'])) {
             attachImagePreviewListeners();
         });
     </script>
+
+    <script>
+        document.getElementById("video").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const video = document.getElementById("videoPreview");
+                video.src = URL.createObjectURL(file);
+                video.style.display = "block";
+            }
+        });
+    </script>
+    <script>
+        function PreviewImage() 
+        {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("image").files[0]);
+            oFReader.onload = function(oFREvent) {
+                document.getElementById("uploadPreview").src = oFREvent.target.result;
+            };
+        };    
+    </script>
+
 </body>
 </html>

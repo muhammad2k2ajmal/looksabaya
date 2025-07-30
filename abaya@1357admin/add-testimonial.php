@@ -1,5 +1,4 @@
 <?php
-
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -26,19 +25,15 @@ if (isset($_REQUEST['id'])) {
 if (isset($_REQUEST['submit'])) {
     $name = $db->addStr($_POST['name']);
     $testimonial = $db->addStr($_POST['testimonial']);
+    $heading = $db->addStr($_POST['heading']); // Added heading
     $status = $db->addStr($_POST['status']);
-    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $image = $_FILES['image']['name'];
-        $dest = "../adminuploads/testimonials/";
-        $files = resize(1200, 995, $dest, $_FILES['image']['tmp_name'], $image);
-    } else {
-        $files = '0';
-    }
+    $rating = $db->addStr($_POST['rating']);
+
 
     $checkTestimonial = $admin->checkTestimonials($name, 'testimonial');
 
     if ($checkTestimonial == 0) {
-      $result = $admin->addTestimonials($name, $testimonial, $files, $status);
+      $result = $admin->addTestimonials($name, $testimonial,  $status, $rating, $heading);
 
       if ($result === true) {
         $_SESSION['msg'] = 'Testimonial has been created successfully ..!!';
@@ -60,29 +55,13 @@ if (isset($_REQUEST['submit'])) {
 if (isset($_REQUEST['update'])) {
     $name = $db->addStr($_POST['name']);
     $testimonial = $db->addStr($_POST['testimonial']);
+    $heading = $db->addStr($_POST['heading']); // Added heading
     $status = $db->addStr($_POST['status']);
-    $oldimage = $_POST['oldimage'];
-    $dest = "../adminuploads/testimonials/";
+    $rating = $db->addStr($_POST['rating']);
 
-    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $image = $_FILES['image']['name'];
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $files = resize(1200, 995, $dest, $tmp_name, $image);
+    
 
-        if ($files) {
-          if (file_exists($dest . $oldimage)) {
-              unlink($dest . $oldimage);
-          }
-        } else {
-            $_SESSION['errmsg'] = 'Error uploading file.';
-            header("Location: view-testimonial.php");
-            exit;
-        }
-    } else {
-        $files = $oldimage;
-    }
-
-    $result = $admin->updateTestimonials($name, $testimonial, $files, $status, $id);
+    $result = $admin->updateTestimonials($name, $testimonial, $status, $rating, $heading, $id);
 
     if ($result === true) {
       $_SESSION['msg'] = "Testimonial has been updated successfully ..!!";
@@ -145,17 +124,28 @@ if (isset($_REQUEST['update'])) {
                                             </div>
                                             <div class="row my-3">
                                                 <div class="col-md-5">
+                                                    <label class="form-label" for="validationCustom05">Heading</label>
+                                                    <input name="heading" type="text" class="form-control" placeholder="Enter Heading" id="validationCustom05" required>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col-md-5">
                                                     <label class="form-label" for="validationCustom03">Testimonial</label>
                                                     <textarea name="testimonial" class="form-control" placeholder="Enter Testimonial" id="validationCustom03" rows="4" required></textarea>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3 d-flex align-items-center">
+                                            
+                                            <div class="row mb-3">
                                                 <div class="col-md-5">
-                                                    <label class="form-label">Image (Size: 1200px*995px)</label>
-                                                    <input name="image" type="file" class="form-control" id="image" onChange="PreviewImage();" required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <img id="uploadPreview" style="height: 130px;">
+                                                    <label class="form-label" for="validationCustom04">Rating</label>
+                                                    <select name="rating" class="form-select" id="validationCustom04" required>
+                                                        <option value="">Select Rating</option>
+                                                        <option value="1">1 Star</option>
+                                                        <option value="2">2 Stars</option>
+                                                        <option value="3">3 Stars</option>
+                                                        <option value="4">4 Stars</option>
+                                                        <option value="5">5 Stars</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -182,18 +172,27 @@ if (isset($_REQUEST['update'])) {
                                             </div>
                                             <div class="row my-3">
                                                 <div class="col-md-5">
+                                                    <label class="form-label" for="validationCustom05">Heading</label>
+                                                    <input name="heading" type="text" class="form-control" placeholder="Enter Heading" id="validationCustom05" value="<?php echo $editval['heading']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col-md-5">
                                                     <label class="form-label" for="validationCustom03">Testimonial</label>
                                                     <textarea name="testimonial" class="form-control" placeholder="Enter Testimonial" id="validationCustom03" rows="4" required><?php echo $editval['testimonial']; ?></textarea>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3 d-flex align-items-center">
+                                            <div class="row mb-3">
                                                 <div class="col-md-5">
-                                                    <label class="form-label">Image (Size: 1200px*995px)</label>
-                                                    <input name="image" type="file" class="form-control" id="image" onChange="PreviewImage();">
-                                                    <input type="hidden" name="oldimage" value="<?php echo $editval['image']; ?>" class="form-control">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <img src="../adminuploads/testimonials/<?php echo $editval['image']; ?>" id="uploadPreview" style="height: 130px;">
+                                                    <label class="form-label" for="validationCustom04">Rating</label>
+                                                    <select name="rating" class="form-select" id="validationCustom04" required>
+                                                        <option value="">Select Rating</option>
+                                                        <option value="1" <?php if (isset($editval['rating']) && $editval['rating'] == "1") echo 'selected'; ?>>1 Star</option>
+                                                        <option value="2" <?php if (isset($editval['rating']) && $editval['rating'] == "2") echo 'selected'; ?>>2 Stars</option>
+                                                        <option value="3" <?php if (isset($editval['rating']) && $editval['rating'] == "3") echo 'selected'; ?>>3 Stars</option>
+                                                        <option value="4" <?php if (isset($editval['rating']) && $editval['rating'] == "4") echo 'selected'; ?>>4 Stars</option>
+                                                        <option value="5" <?php if (isset($editval['rating']) && $editval['rating'] == "5") echo 'selected'; ?>>5 Stars</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -262,11 +261,18 @@ if (isset($_REQUEST['update'])) {
                             required: true,
                             maxlength: 200
                         },
+                        heading: { // Added validation for heading
+                            required: true,
+                            maxlength: 200
+                        },
                         testimonial: {
                             required: true,
                             maxlength: 1000
                         },
                         status: {
+                            required: true
+                        },
+                        rating: {
                             required: true
                         }
                     },
@@ -275,12 +281,19 @@ if (isset($_REQUEST['update'])) {
                             required: "Please enter name.",
                             maxlength: "Name cannot be more than 200 characters."
                         },
+                        heading: { // Added error messages for heading
+                            required: "Please enter heading.",
+                            maxlength: "Heading cannot be more than 200 characters."
+                        },
                         testimonial: {
                             required: "Please enter testimonial text.",
                             maxlength: "Testimonial cannot be more than 1000 characters."
                         },
                         status: {
                             required: "Please select status."
+                        },
+                        rating: {
+                            required: "Please select a rating."
                         }
                     },
                     errorClass: "is-invalid",

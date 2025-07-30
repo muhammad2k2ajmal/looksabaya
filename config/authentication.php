@@ -48,14 +48,14 @@ class Authentication
 	// 	return $registerId;
 	// }
 
-	public function register($firstName, $surname, $dob, $email, $password)
+	public function register($firstName, $surname, $email, $password)
 	{
 		$conn = new dbClass;
 
 		$this->conndb = $conn;
 
 
-		$output2 = $conn->execute("INSERT INTO `customers`(`first_name`, `surname`, `dob`, `email`, `password`) VALUES ('$firstName', '$surname', '$dob', '$email', '$password')");
+		$output2 = $conn->execute("INSERT INTO `customers`(`first_name`, `surname`, `email`, `password`) VALUES ('$firstName', '$surname', '$email', '$password')");
 		$output = $conn->getData("SELECT `customer_id` FROM `customers` WHERE `email` = '$email' AND `password` = '$password'");
 		$output1 = $conn->getData("SELECT * FROM `customers` WHERE `email` = '$email' AND `password` = '$password'");
 		$_SESSION['CUSTOMER_NAME'] = $output1['first_name'] . " " . $output1['surname'];
@@ -309,6 +309,7 @@ class Authentication
 		if (empty($customerId) || !is_numeric($customerId)) {
 			return false; // Invalid customer_id
 		}
+		
 
 		$conn = new dbClass;
 		$this->conndb = $conn;

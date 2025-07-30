@@ -27,7 +27,7 @@ if (isset($_REQUEST['submit'])) {
 
     if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $image = $_FILES['image']['name'];
-        $dest = "../adminUploads/banner/";
+        $dest = "../adminuploads/banner/";
         $files = resize(1920, 700, $dest, $_FILES['image']['tmp_name'], $image);
     } else {
         $files = '0';
@@ -55,7 +55,7 @@ if(isset($_REQUEST['update'])) {
     $button_link = $db->addStr($_POST['button_link'] ?? '');
   
     $oldimage = $_POST['oldimage'];
-    $dest = "../adminUploads/banner/";
+    $dest = "../adminuploads/banner/";
   
     if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
       $image = $_FILES['image']['name'];
@@ -183,7 +183,7 @@ if(isset($_REQUEST['update'])) {
                                                     <input type="hidden" name="oldimage" value="<?php echo $editval['image']; ?>" class="form-control">                                                 
                                                 </div>
                                                 <div class="col-md-3">                                               
-                                                    <img src="../adminUploads/banner/<?php echo $editval['image']; ?>" id="uploadPreview" style="height: 130px;">                                                   
+                                                    <img src="../adminuploads/banner/<?php echo $editval['image']; ?>" id="uploadPreview" style="height: 130px;">                                                   
                                                 </div>
                                             </div>
                                             
