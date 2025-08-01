@@ -1,0 +1,27 @@
+2025-03-05 10:13:00 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741145336C56","orderId":"OMO2503051012448554702144","state":"COMPLETED","amount":100,"expireAt":1741150964854,"paymentDetails":[{"transactionId":"OM2503051012462617945765","paymentMode":"UPI_QR","timestamp":1741149766291,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"719264514191","upiTransactionId":"YBLb630c8df4a6d4bb4a174d97e6b848569"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"719264514191","upiTransactionId":"YBLb630c8df4a6d4bb4a174d97e6b848569"},"amount":100}]}]}}
+2025-03-05 10:13:00 - PARSED DATA: Array
+(
+    [Transaction ID] => N/A
+    [Merchant Transaction ID] => N/A
+    [Status] => N/A
+    [Amount] => N/A
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Bank Name] => N/A
+    [Timestamp] => 
+)
+
+2025-03-05 10:14:45 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741144494C56","orderId":"OMO2503051014296926619549","state":"COMPLETED","amount":100,"expireAt":1741151069690,"paymentDetails":[{"transactionId":"OM2503051014310601590474","paymentMode":"UPI_QR","timestamp":1741149871088,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"219045378365","upiTransactionId":"YBLb20aae04cbf44239bae1bd7eeeecf36a"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"219045378365","upiTransactionId":"YBLb20aae04cbf44239bae1bd7eeeecf36a"},"amount":100}]}]}}
+2025-03-05 10:14:45 - PARSED DATA: Array
+(
+    [Transaction ID] => N/A
+    [Merchant Transaction ID] => N/A
+    [Status] => N/A
+    [Amount] => N/A
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Bank Name] => N/A
+    [Timestamp] => 
+)
+
+2025-03-05 10:14:52 - RAW DATA: 

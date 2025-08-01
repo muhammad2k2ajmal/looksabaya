@@ -1,0 +1,100 @@
+2025-03-05 10:22:41 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741159707C56","orderId":"OMO2503051022213430555624","state":"COMPLETED","amount":100,"expireAt":1741151541341,"paymentDetails":[{"transactionId":"OM2503051022228430548194","paymentMode":"UPI_QR","timestamp":1741150342874,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"798503483931","upiTransactionId":"YBL1e6db353bf2a40b4bfb402170fc7fb2d"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"798503483931","upiTransactionId":"YBL1e6db353bf2a40b4bfb402170fc7fb2d"},"amount":100}]}]}}
+2025-03-05 10:22:41 - PARSED DATA: Array
+(
+    [Transaction ID] => OM2503051022228430548194
+    [Merchant Transaction ID] => PEURA1741159707C56
+    [Status] => COMPLETED
+    [Amount] => 100
+    [Instrument Type] => ACCOUNT
+    [Bank Transaction ID] => 798503483931
+    [Bank Name] => N/A
+    [Timestamp] => 2025-03-05 10:22:22
+)
+
+2025-03-05 10:22:48 - RAW DATA: 
+2025-03-05 10:22:48 - PARSED DATA: Array
+(
+    [Transaction ID] => N/A
+    [Merchant Transaction ID] => N/A
+    [Status] => N/A
+    [Amount] => N/A
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Bank Name] => N/A
+    [Timestamp] => N/A
+)
+
+2025-03-05 10:23:45 - RAW DATA: {"type":"CHECKOUT_ORDER_FAILED","event":"checkout.order.failed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA17411492225177","orderId":"OMO2503051003427124151912","state":"FAILED","amount":100,"expireAt":1741150422710,"errorCode":"TXN_NOT_COMPLETED","detailedErrorCode":"TXN_AUTO_FAILED","paymentDetails":[{"transactionId":"OM2503051003440794081368","paymentMode":"UPI_QR","timestamp":1741149224107,"amount":100,"payableAmount":100,"feeAmount":0,"state":"FAILED","errorCode":"TXN_NOT_COMPLETED","detailedErrorCode":"TXN_AUTO_FAILED"}]}}
+2025-03-05 10:23:45 - PARSED DATA: Array
+(
+    [Transaction ID] => OM2503051003440794081368
+    [Merchant Transaction ID] => PEURA17411492225177
+    [Status] => FAILED
+    [Amount] => 100
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Bank Name] => N/A
+    [Timestamp] => 2025-03-05 10:03:44
+)
+
+2025-03-05 10:24:49 - RAW DATA: 
+2025-03-05 10:24:49 - PARSED DATA: Array
+(
+    [Transaction ID] => N/A
+    [Merchant Transaction ID] => N/A
+    [Status] => N/A
+    [Amount] => N/A
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Bank Name] => N/A
+    [Timestamp] => N/A
+)
+
+2025-03-05 10:31:01 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741158167C56","orderId":"OMO2503051030411372965901","state":"COMPLETED","amount":100,"expireAt":1741152041135,"paymentDetails":[{"transactionId":"OM2503051030425041590826","paymentMode":"UPI_QR","timestamp":1741150842538,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"585432053267","upiTransactionId":"YBL58b85d378de042d6be33cc98369ec17c"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"585432053267","upiTransactionId":"YBL58b85d378de042d6be33cc98369ec17c"},"amount":100}]}]}}
+2025-03-05 10:31:01 - PARSED DATA: Array
+(
+    [Transaction ID] => OM2503051030425041590826
+    [Merchant Transaction ID] => PEURA1741158167C56
+    [Status] => COMPLETED
+    [Amount] => ₹100
+    [Instrument Type] => ACCOUNT
+    [Bank Transaction ID] => 585432053267
+    [Timestamp] => 2025-03-05 10:30:42
+)
+
+2025-03-05 10:31:07 - RAW DATA: 
+2025-03-05 10:31:07 - PARSED DATA: Array
+(
+    [Transaction ID] => N/A
+    [Merchant Transaction ID] => N/A
+    [Status] => N/A
+    [Amount] => N/A
+    [Instrument Type] => N/A
+    [Bank Transaction ID] => N/A
+    [Timestamp] => N/A
+)
+
+2025-03-05 10:33:15 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741158377C56","orderId":"OMO2503051033025957664276","state":"COMPLETED","amount":100,"expireAt":1741152182594,"paymentDetails":[{"transactionId":"OM2503051033040224738190","paymentMode":"UPI_QR","timestamp":1741150984050,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"138918722016","upiTransactionId":"YBL3d5072e4ecfc42bcb6dd5ca06a237d9e"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"138918722016","upiTransactionId":"YBL3d5072e4ecfc42bcb6dd5ca06a237d9e"},"amount":100}]}]}}
+2025-03-05 10:33:15 - SESSION DATA: Array
+(
+    [transactionId] => OM2503051033040224738190
+    [merchantTransactionId] => PEURA1741158377C56
+    [status] => COMPLETED
+    [amount] => ₹100
+    [instrumentType] => ACCOUNT
+    [bankTransactionId] => 138918722016
+    [timestamp] => 2025-03-05 10:33:04
+)
+
+2025-03-05 12:44:51 - RAW DATA: {"type":"CHECKOUT_ORDER_COMPLETED","event":"checkout.order.completed","payload":{"merchantId":"M22RSI8C7VBNS","merchantOrderId":"PEURA1741156320C63","orderId":"OMO2503051243362394081254","state":"COMPLETED","amount":100,"expireAt":1741160016237,"paymentDetails":[{"transactionId":"OM2503051243376525021958","paymentMode":"UPI_QR","timestamp":1741158817679,"amount":100,"payableAmount":100,"feeAmount":0,"state":"COMPLETED","instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"161912147436","upiTransactionId":"YBL07662ccfa60d43d7b941e256bf105112"},"splitInstruments":[{"instrument":{"type":"ACCOUNT","maskedAccountNumber":"XXXXXXXXXXX0035","ifsc":"UBIN0530051","accountType":"SAVINGS"},"rail":{"type":"UPI","utr":"161912147436","upiTransactionId":"YBL07662ccfa60d43d7b941e256bf105112"},"amount":100}]}]}}
+2025-03-05 12:44:51 - SESSION DATA: Array
+(
+    [transactionId] => OM2503051243376525021958
+    [merchantTransactionId] => PEURA1741156320C63
+    [status] => COMPLETED
+    [amount] => ₹100
+    [instrumentType] => ACCOUNT
+    [bankTransactionId] => 161912147436
+    [timestamp] => 2025-03-05 12:43:37
+)
+

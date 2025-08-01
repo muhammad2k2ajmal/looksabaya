@@ -19,7 +19,7 @@ $cartItem = new Cart();
 $calculator = new PincodeDistanceCalculator();
 
 if (!isset($_SESSION['USER_LOGIN'])) {
-    $_SESSION['USER_CHECKOUT'] = 'buynow';
+    $_SESSION['USER_CHECKOUT'] = 'checkout';
     $_SERVER['REQUEST_URI'] = "looksabaya-buynow.php";
     header('Location: abayalooks-login.php');
     exit();
@@ -53,6 +53,7 @@ if ($defaultPostcode) {
 
 $ipAddress = $_SERVER["REMOTE_ADDR"];
 $cartData = $cartItem->buyNowItems($_SESSION['cart_item'] ?? [], $ipAddress);
+// var_dump($cartData);
 if (!$cartData) {
     header('Location: index.php');
     exit();
@@ -92,7 +93,7 @@ if (isset($_REQUEST['update'])) {
 
             if ($sqlQuery) {
                 $_SESSION['msg'] = "Address updated successfully.";
-                header("Location: looksabaya-buynow.php");
+                header("Location: looksabaya-checkout.php");
                 exit;
             } else {
                 $errors[] = "Error updating address.";
@@ -126,7 +127,7 @@ if (isset($_REQUEST['add'])) {
             } else {
                 $errors[] = $result['error'];
                 $_SESSION['errmsg'] = implode("<br>", $errors);
-                header("Location: looksabaya-buynow.php");
+                header("Location: looksabaya-checkout.php");
                 exit;
             }
         }
@@ -148,7 +149,7 @@ if (isset($_REQUEST['add'])) {
 
         if ($sqlQuery) {
             $_SESSION['msg'] = "Address " . ($type === 'billing' ? "updated" : "added") . " successfully.";
-            header("Location: looksabaya-buynow.php");
+            header("Location: looksabaya-checkout.php");
             exit;
         } else {
             $errors[] = "Error " . ($type === 'billing' ? "updating" : "adding") . " address.";
@@ -188,7 +189,7 @@ if (isset($_REQUEST['add'])) {
                                     <li class="breadcrumb-item">
                                         <a href="looksabaya-cart.php" class="text-decoration-none">Shopping Cart</a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Buy Now</li>
                                 </ol>
                             </nav>
                         </div>
@@ -214,7 +215,7 @@ if (isset($_REQUEST['add'])) {
                                     </a>
                                 </aside>
 								<?php	if(count($userAllShipDetail)<3):?>
-									<div id="loginAlertPopup" class="alertCollapseWrap collapse py-2 ps-1 pe-2 mb-4 <?php	if(count($userAllShipDetail)<1):?> show <?php else: ?> collapse<?php endif; ?>">
+									<div id="loginAlertPopup" class="alertCollapseWrap collapse py-2 ps-1 pe-2 mb-4 show">
 										<form id="addaddress" method="post" enctype="multipart/form-data" class="ChForm">
 											<input type="hidden" name="type" value="shipping">
 											<div class="bilingDetailsWrap row pt-lg-5 pt-xl-6 mb-8 mb-xl-14">
@@ -555,6 +556,9 @@ if (isset($_REQUEST['add'])) {
                                     $discountTotal = 0;
                                     $appliedCoupon = isset($_SESSION['applied_coupon']) ? $_SESSION['applied_coupon'] : null;
                                     $couponDiscount = 0;
+$cartData = $cartItem->buyNowItems($_SESSION['cart_item'] ?? [], $ipAddress);
+
+                                    // var_dump($cartData);
                                     if (!empty($cartData)):
                                         foreach ($cartData as $cartRow):
                                             $cartProductSql = $products->getProductsById($cartRow['product_id']);
@@ -599,7 +603,6 @@ if (isset($_REQUEST['add'])) {
                                         <div class="d-flex justify-content-between mb-6">
                                             <span class="subheading fw-normal">Total</span>
                                             <strong class="Hprice fw-medium" id="totalWithShipping">Rs.<?php echo number_format($finalTotal, 2); ?></strong>
-                                            <input type="hidden" name="totalamtforPayment" id="totalamtforPayment" value="<?php echo $finalTotal; ?>">
                                         </div>
                                     <?php else: ?>
                                         <p>Your cart is empty.</p>
@@ -610,7 +613,7 @@ if (isset($_REQUEST['add'])) {
                                             I have read and agree to the website <a href="javascript:void(0);">terms and conditions</a> *
                                         </label>
                                     </div>
-                                    <button class="btn btnP btn-dark fw-medium w-100 mb-1" id="placeOrderBtn" >Place Order</button>
+                                    <button class="btn btnP btn-dark fw-medium w-100 mb-1" id="placeOrderBtn" onclick="validateAndProceed()">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -794,7 +797,6 @@ if (isset($_REQUEST['add'])) {
 
                         $('#shippingCharge').text('Rs.' + shippingCharge.toFixed(2));
                         $('#totalWithShipping').text('Rs.' + finalTotal.toFixed(2));
-                        $('#totalamtforPayment').val(finalTotal);
                         $(`#shippingChargeShould-${index}`).val(shippingCharge);
                         $(`#totalAmount-${index}`).val(finalTotal);
                     },
@@ -816,7 +818,6 @@ if (isset($_REQUEST['add'])) {
                     $('#totalWithShipping').text('Rs.' + finalTotal.toFixed(2));
                     $(`#shippingChargeShould-${index}`).val(0);
                     $(`#totalAmount-${index}`).val(finalTotal);
-                    $('#totalamtforPayment').val(finalTotal);
                 }
             }
 
@@ -852,138 +853,49 @@ if (isset($_REQUEST['add'])) {
                 updateShippingCharge(postcode, index);
             }
 
-            // function validateAndProceed() {
-            //     if (!$('#subtotalAmount').length || parseFloat($('#subtotalAmount').text().replace(/[^\d.]/g, '')) <= 0) {
-            //         toastr.error('Your cart is empty or invalid. Please add items to proceed.');
-            //         return;
-            //     }
-
-            //     const shippingAddress = $("input[name='shipping-address']:checked");
-            //     if (shippingAddress.length === 0) {
-            //         toastr.error('Please select a shipping address.');
-            //         return;
-            //     }
-
-            //     const postcode = shippingAddress.data('postcode');
-            //     if (!postcode || !/^[0-9A-Za-z\s\-]{4,10}$/.test(postcode)) {
-            //         toastr.error('Please select a shipping address with a valid postcode.');
-            //         return;
-            //     }
-
-            //     const shippingChargeText = $('#shippingCharge').text().replace(/[^\d.]/g, '');
-            //     const shippingCharge = parseFloat(shippingChargeText) || 0;
-            //     if (isNaN(shippingCharge) || shippingCharge < 0) {
-            //         toastr.error('Shipping charge could not be calculated. Please ensure the postcode is valid.');
-            //         return;
-            //     }
-
-            //     const sameAddressChecked = $('#sameAddressCheckbox').is(':checked');
-            //     let billId = '';
-            //     if (!sameAddressChecked) {
-            //         const billingAddress = $("input[name='billing-address']:checked");
-            //         if (billingAddress.length === 0) {
-            //             toastr.error('Please select a billing address or check "Billing and shipping address are the same".');
-            //             return;
-            //         }
-            //         billId = billingAddress.val();
-            //     } else {
-            //         billId = shippingAddress.val();
-            //     }
-
-            //     const shipId = shippingAddress.val();
-            //     const totalAmount = $('#totalamtforPayment').val();
-            //     const type = 'cart';
-            //     // window.location.href = `update-shipping.php?shipId=${encodeURIComponent(shipId)}&billId=${encodeURIComponent(billId)}&type=${encodeURIComponent(type)}`;
-            //     $.ajax({
-			// 		url: 'payment.php',
-			// 		method: 'POST',
-			// 		data: { shipId: shipId, billId: billId, type: type,
-            //             totalAmount: totalAmount},
-			// 		success: function (response) {
-			// 			var data = JSON.parse(response);
-			// 			if (data.redirectUrl) {
-			// 				window.location.href = data.redirectUrl;
-			// 			} else {
-			// 				alert('Payment initiation failed. Please try again.');
-			// 			}
-			// 		},
-			// 		error: function () {
-			// 			alert('An error occurred while processing the payment. Please try again.');
-			// 		}
-			// 	});
-            // }
             function validateAndProceed() {
-    if (!$('#subtotalAmount').length || parseFloat($('#subtotalAmount').text().replace(/[^\d.]/g, '')) <= 0) {
-        toastr.error('Your cart is empty or invalid. Please add items to proceed.');
-        return;
-    }
-
-    const shippingAddress = $("input[name='shipping-address']:checked");
-    if (shippingAddress.length === 0) {
-        toastr.error('Please select a shipping address.');
-        return;
-    }
-
-    const postcode = shippingAddress.data('postcode');
-    if (!postcode || !/^[0-9A-Za-z\s\-]{4,10}$/.test(postcode)) {
-        toastr.error('Please select a shipping address with a valid postcode.');
-        return;
-    }
-
-    const shippingChargeText = $('#shippingCharge').text().replace(/[^\d.]/g, '');
-    const shippingCharge = parseFloat(shippingChargeText) || 0;
-    if (isNaN(shippingCharge) || shippingCharge < 0) {
-        toastr.error('Shipping charge could not be calculated. Please ensure the postcode is valid.');
-        return;
-    }
-
-    const sameAddressChecked = $('#sameAddressCheckbox').is(':checked');
-    let billId = '';
-    if (!sameAddressChecked) {
-        const billingAddress = $("input[name='billing-address']:checked");
-        if (billingAddress.length === 0) {
-            toastr.error('Please select a billing address or check "Billing and shipping address are the same".');
-            return;
-        }
-        billId = billingAddress.val();
-    } else {
-        billId = shippingAddress.val();
-    }
-
-    const shipId = shippingAddress.val();
-    const totalAmount = $('#totalamtforPayment').val();
-    const type = 'buynow';
-
-    $.ajax({
-        url: 'payment',
-        method: 'POST',
-        data: { shipId: shipId, billId: billId, type: type, totalAmount: totalAmount },
-        dataType: 'json', // Expect JSON response
-        success: function (response) {
-            if (response.redirectUrl) {
-                window.location.href = response.redirectUrl;
-            } else {
-                console.error('Invalid response from payment.php:', response);
-                toastr.error('Payment initiation failed. Please try again.');
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.error('AJAX error:', textStatus, errorThrown);
-            console.error('Response text:', jqXHR.responseText); // Log raw response for debugging
-            try {
-                const parsedResponse = JSON.parse(jqXHR.responseText);
-                if (parsedResponse.error) {
-                    toastr.error(parsedResponse.error);
-                } else {
-                    toastr.error('An error occurred while processing the payment. Please try again.');
+                if (!$('#subtotalAmount').length || parseFloat($('#subtotalAmount').text().replace(/[^\d.]/g, '')) <= 0) {
+                    toastr.error('Your cart is empty or invalid. Please add items to proceed.');
+                    return;
                 }
-            } catch (e) {
-                console.error('JSON parse error:', e.message);
-                toastr.error('Invalid response from server. Please try again.');
+
+                const shippingAddress = $("input[name='shipping-address']:checked");
+                if (shippingAddress.length === 0) {
+                    toastr.error('Please select a shipping address.');
+                    return;
+                }
+
+                const postcode = shippingAddress.data('postcode');
+                if (!postcode || !/^[0-9A-Za-z\s\-]{4,10}$/.test(postcode)) {
+                    toastr.error('Please select a shipping address with a valid postcode.');
+                    return;
+                }
+
+                const shippingChargeText = $('#shippingCharge').text().replace(/[^\d.]/g, '');
+                const shippingCharge = parseFloat(shippingChargeText) || 0;
+                if (isNaN(shippingCharge) || shippingCharge < 0) {
+                    toastr.error('Shipping charge could not be calculated. Please ensure the postcode is valid.');
+                    return;
+                }
+
+                const sameAddressChecked = $('#sameAddressCheckbox').is(':checked');
+                let billId = '';
+                if (!sameAddressChecked) {
+                    const billingAddress = $("input[name='billing-address']:checked");
+                    if (billingAddress.length === 0) {
+                        toastr.error('Please select a billing address or check "Billing and shipping address are the same".');
+                        return;
+                    }
+                    billId = billingAddress.val();
+                } else {
+                    billId = shippingAddress.val();
+                }
+
+                const shipId = shippingAddress.val();
+                const type = 'buyNow';
+                const couponCode = '<?php echo isset($_SESSION["coupon_code"]) ? addslashes($_SESSION['coupon_code']) : ""; ?>';
+                window.location.href = `update-shipping.php?shipId=${encodeURIComponent(shipId)}&billId=${encodeURIComponent(billId)}&type=${encodeURIComponent(type)}&coupon=${encodeURIComponent(couponCode)}`;
             }
-        }
-    });
-}
         });
     </script>
 </body>

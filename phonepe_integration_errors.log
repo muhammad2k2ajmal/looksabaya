@@ -1,0 +1,130 @@
+2025-02-17 17:04:22 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5NzkyMDYyNjIwNyIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 17:06:20 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5NzkyMTgwOTAwNSIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 404
+)
+
+
+2025-02-17 17:06:23 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5NzkyMTgzMjcwMCIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 404
+)
+
+
+2025-02-17 17:07:57 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5NzkyMjc2MzgxOCIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 17:33:36 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5NzkzODE1OTgyNyIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 17:53:32 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5Nzk1MDEyMjY4OSIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 18:22:20 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5Nzk2NzQwNjEyOCIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 18:45:17 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5Nzk4MTE3NDA1OCIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 18:47:15 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5Nzk4MjM1MjgxNiIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+
+2025-02-17 22:47:20 - Redirect URL Not Found:
+Request:
+{
+    "request": "eyJtZXJjaGFudElkIjoiTTIyUlNJOEM3VkJOUyIsIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6InR4bl8xNzM5ODEyNjQwMjk5MSIsIm1lcmNoYW50VXNlcklkIjoiTVVJRDEyMyIsImFtb3VudCI6MTAwLCJyZWRpcmVjdFVybCI6Imh0dHBzOlwvXC9wZXVyYW9wdGljYWxzLmNvbVwvY2FsbGJhY2sucGhwIiwicmVkaXJlY3RNb2RlIjoiUE9TVCIsImNhbGxiYWNrVXJsIjoiaHR0cHM6XC9cL3BldXJhb3B0aWNhbHMuY29tXC9jYWxsYmFjay5waHAiLCJtb2JpbGVOdW1iZXIiOiIxMjM0NTY3ODkwIiwicGF5bWVudEluc3RydW1lbnQiOnsidHlwZSI6IlBBWV9QQUdFIn19"
+}
+Response:
+Array
+(
+    [success] => 
+    [code] => 400
+)
+
+

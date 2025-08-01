@@ -132,8 +132,8 @@ $getShipping = $db->getData("SELECT * FROM `order_ship_address` WHERE `id` = '".
                                                 <i class="iconoir-map-pin text-secondary fs-20 align-middle me-1"></i>Address :
                                             </p>
                                             <p class="text-body-emphasis fw-semibold">
-                                                <?php if (!empty($getCustomer['house_no']) || !empty($getCustomer['place_name']) ||!empty($getCustomer['street_name']) || !empty($getCustomer['addition']) || !empty($getCustomer['postal_code']) || !empty($getCustomer['country'])): ?>
-                                                    <?php echo $getCustomer['house_no'] . ', ' . $getCustomer['place_name'] .', ' . $getCustomer['street_name'] . ', ' . $getCustomer['addition'] . ', ' . $getCustomer['postal_code'] . ' - ' . $getCustomer['country']; ?>
+                                                <?php if (!empty($getShipping['house_no']) || !empty($getShipping['place_name']) ||!empty($getShipping['street_name']) || !empty($getShipping['addition']) || !empty($getShipping['postal_code']) || !empty($getShipping['country'])): ?>
+                                                    <?php echo $getShipping['house_no'] . ', ' . $getShipping['place_name'] .', ' . $getShipping['street_name'] . ', ' . $getShipping['addition'] . ', ' . $getShipping['postal_code'] . ' - ' . $getShipping['country']; ?>
                                                 <?php endif; ?>
                                             </p>
                                         </div>                                        
@@ -197,10 +197,9 @@ $getShipping = $db->getData("SELECT * FROM `order_ship_address` WHERE `id` = '".
                                             </tbody>
                                         </table>
                                         <h3 style="text-align: right;">Sub Total: ₹<?= $row['subtotal']; ?></h3>
-<br>
-<!-- <h3 style="text-align: right;">Coupon Code (<?= $row['coupon_code']; ?>, <?= $row['couponDiscountPercentage']; ?>%): ₹<?= $row['coupon_discount']; ?></h3> -->
-<h3 style="text-align: right;">Shipping Charge : ₹  <?= number_format($row['shipping_charge'], 2); ?></h3>
-<h2 style="text-align: right;">Total Amount: ₹ <?= number_format($row['total'], 2); ?></h2>
+                                        <br>
+                                        <h3 style="text-align: right;">Shipping Charge : ₹  <?= number_format($row['shipping_charge'], 2); ?></h3>
+                                        <h2 style="text-align: right;">Total Amount: ₹ <?= number_format($row['total'], 2); ?></h2>
 
                                     </div>
                                 </div>

@@ -1,0 +1,56 @@
+Array
+(
+    [access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [encrypted_access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [refresh_token] => 706061a6-4269-43e7-8a33-d11175df09a2
+    [expires_in] => 3600
+    [issued_at] => 1740067230
+    [expires_at] => 1740070830
+    [session_expires_at] => 1740070830
+    [token_type] => O-Bearer
+)
+Array
+(
+    [access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [encrypted_access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [refresh_token] => 706061a6-4269-43e7-8a33-d11175df09a2
+    [expires_in] => 3472
+    [issued_at] => 1740067230
+    [expires_at] => 1740070830
+    [session_expires_at] => 1740070830
+    [token_type] => O-Bearer
+)
+Array
+(
+    [access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [encrypted_access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [refresh_token] => 706061a6-4269-43e7-8a33-d11175df09a2
+    [expires_in] => 2426
+    [issued_at] => 1740067230
+    [expires_at] => 1740070830
+    [session_expires_at] => 1740070830
+    [token_type] => O-Bearer
+)
+Array
+(
+    [message] => Bad Request - Api Mapping Not Found
+)
+Array
+(
+    [message] => Bad Request - Api Mapping Not Found
+)
+Array
+(
+    [message] => Bad Request - Api Mapping Not Found
+)
+Array
+(
+    [access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [encrypted_access_token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpZGVudGl0eU1hbmFnZXIiLCJ2ZXJzaW9uIjoiNC4wIiwidGlkIjoiMTVhNDc0NjUtNjYzNi00M2M0LWIzZGItZTI1MmZiOWI3NDc5Iiwic2lkIjoiNmUzMTJlOGEtNzRlYi00YzUxLThiZDAtOGE2NzUxYzc4ZWMzIiwiaWF0IjoxNzQwMDY3MjMwLCJleHAiOjE3NDAwNzA4MzB9.10pRHIzNII5RGy53uVMvpxNATprYG3brtHOKmBwaWHZEVWOo4IpU_lMk3aaoalz68K3DX0QbF0mgAsluw58_Aw
+    [refresh_token] => 706061a6-4269-43e7-8a33-d11175df09a2
+    [expires_in] => 1992
+    [issued_at] => 1740067230
+    [expires_at] => 1740070830
+    [session_expires_at] => 1740070830
+    [token_type] => O-Bearer
+)

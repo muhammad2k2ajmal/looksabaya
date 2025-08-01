@@ -1,0 +1,108 @@
+Array
+(
+    [merchantOrderId] => PEURA17538797459052
+    [amount] => 1161300
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538797459052&shipId=16&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538797459052&shipId=16&type=cart
+                )
+
+        )
+
+)
+Array
+(
+    [merchantOrderId] => PEURA17538802631044
+    [amount] => 1161300
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538802631044&shipId=18&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538802631044&shipId=18&type=cart
+                )
+
+        )
+
+)
+Array
+(
+    [merchantOrderId] => PEURA17538804434880
+    [amount] => 1161300
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538804434880&shipId=18&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538804434880&shipId=18&type=cart
+                )
+
+        )
+
+)
+Array
+(
+    [merchantOrderId] => PEURA17538804699057
+    [amount] => 100
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538804699057&shipId=18&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => localhost/abaya/update-shipping.php?transactionId=PEURA17538804699057&shipId=18&type=cart
+                )
+
+        )
+
+)
+Array
+(
+    [merchantOrderId] => PEURA17538805988439
+    [amount] => 100
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => https://localhost/abaya/update-shipping.php?transactionId=PEURA17538805988439&shipId=18&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => https://localhost/abaya/update-shipping.php?transactionId=PEURA17538805988439&shipId=18&type=cart
+                )
+
+        )
+
+)
+Array
+(
+    [merchantOrderId] => PEURA17538806101677
+    [amount] => 100
+    [paymentFlow] => Array
+        (
+            [type] => PG_CHECKOUT
+            [message] => Payment message used for collect requests
+            [merchantUrls] => Array
+                (
+                    [redirectUrl] => https://localhost/abaya/update-shipping.php?transactionId=PEURA17538806101677&shipId=18&type=cart
+                    [redirectMode] => POST
+                    [callbackUrl] => https://localhost/abaya/update-shipping.php?transactionId=PEURA17538806101677&shipId=18&type=cart
+                )
+
+        )
+
+)

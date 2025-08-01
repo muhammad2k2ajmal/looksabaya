@@ -220,7 +220,7 @@ class Authentication
 		$this->Email = $Email;
 		$this->conndb = $conn;
 
-		$websiteUrl = 'https://www.peuraopticals.com/';
+		$websiteUrl = 'https://www.abayalooks.com/';
 
 		$output = $conn->getData("SELECT `customer_id`, `first_name`, `last_name`, `email`, `password` FROM `customers` WHERE `email` = '$Email'");
 
@@ -229,7 +229,7 @@ class Authentication
 			$name = ucwords($output['first_name'] . ' ' . $output['last_name']);
 			$password = $output['password'];
 			$subject = "Your Login Password";
-			$from = "peurainfo@peuraopticals.com";
+			$from = "abayainfo@abayalooks.com";
 			$to = $output['email'];
 
 			$message = '
@@ -276,7 +276,7 @@ class Authentication
 											<tr>
 												<td>To SignIn Your Account</td>
 												<td>
-												: <a href="https://www.peuraopticals.com/login.php">Click Here</a>
+												: <a href="https://www.abayalooks.com/login.php">Click Here</a>
 												</td>
 											</tr>
 										</table>
@@ -313,6 +313,7 @@ class Authentication
 
 		$conn = new dbClass;
 		$this->conndb = $conn;
+		$countBilling = $conn->getRowCount("SELECT * FROM `addresses` WHERE `customer_id` = '$customerId' AND type='billing'");
 
 		// Handle NULL values for nullable fields
 		$type = $type === null ? 'NULL' : "'$type'";
@@ -337,6 +338,18 @@ class Authentication
 
 		// Execute the query
 		$stmt = $conn->execute($query);
+		if($countBilling < 1){
+			// If no billing address exists, set this address as billing
+			$query = "INSERT INTO `addresses` 
+			(`customer_id`, `type`, `country`, `postal_code`, `house_no`, `addition`, `street_name`, `place_name`, 
+			`first_name`, `surname`, `phone`, `email`, `created_at`, `updated_at`) 
+			VALUES 
+			('$customerId', 'billing', $country, $postalCode, $houseNo, $addition, $streetName, $placeName, 
+			$firstName, $surname, $phone, $email, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
+			// Execute the query
+			$stmt = $conn->execute($query);
+		}
 
 		return $stmt;
 	}
@@ -579,7 +592,7 @@ class Authentication
 	{
 		$conn = new dbClass;
 		$this->conndb = $conn;
-		$output = $conn->getData("SELECT id FROM `order_ship_address` WHERE `ship_id` = '$shipId' ORDER BY `id` DESC limit 1");
+		$output = $conn->getData("SELECT * FROM `order_ship_address` WHERE `ship_id` = '$shipId' ORDER BY `id` DESC limit 1");
 		return $output;
 	}
 	public function userOrderAddressDetailsBillId($shipId)
